@@ -107,6 +107,38 @@ function finRatios (response) {
         // Beta
         $("#beta").append("Beta:  " + response.stats.beta);
 
+        //Market Cap
+        // CHANGE FORMAT
+        $("#marketCap").append("Market Capitlization:  " + response.stats.marketcap);
+
+        // Short Ratio
+        $("#shortRatio").append("Short Ratio:  " + response.stats.shortRatio);
+};
+
+
+// adding the financials
+function financials (response) {
+    // revenue
+    // TODO Change format
+
+    $("#revenue").append("Revenue:  " + response.stats.revenue);
+
+
+    // debt
+    $("#debt").append("Debt:  " + response.stats.debt);
+
+    // Gross Profit
+    $("#grossProfit").append("Gross Profit:  " + response.stats.grossProfit);
+
+    // Return on Assets
+    $("#roa").append("Return on Assets:  " + response.stats.returnOnAssets);
+
+    // Return on Capital
+    $("#roe").append("Return on Equity:  " + response.stats.returnOnEquity);
+
+
+    // ProfitMargin
+    $("#profitMargin").append("Profit Margin:  " + response.stats.profitMargin);
 
 
 };
@@ -121,7 +153,6 @@ function finRatios (response) {
       
     var ticker = "aapl";  
     var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials?period=annual,stats,logo,peers,&range=1m&last=10";
-    // var logoURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/logo";
     // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
     $.ajax({
@@ -131,6 +162,7 @@ function finRatios (response) {
         companyData(response);
         peerNewsData(response);
         finRatios(response);
+        financials(response);
         // addLogo(response);
         console.log(response);
         
