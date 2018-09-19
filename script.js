@@ -68,9 +68,14 @@ function companyData(response) {
 };
 
 // Add Logo
-function addLogo() {
-    // Adds logo TODO
-};
+
+
+// function addLogo (response) {
+//     // Adds logo TODO
+   
+
+// };
+
 
 
 // Peer and News information
@@ -83,15 +88,33 @@ function peerNewsData(response) {
 };
 
 // Ratios and other financial data
-function finData(response) {
-    //52 Week High
-    $("#high").append("52 Week High:  " + response.quote.week52High);
+
+
+
+function finRatios (response) {
+        //52 Week High
+        $("#high").append("52 Week High:  " + response.quote.week52High);
+
 
     //52 Week Low
     $("#low").append("52 Week Low:  " + response.quote.week52Low);
 
     // PE ratio
     $("#pe").append("P/E Ratio:  " + response.quote.peRatio);
+
+        //Div rate
+        $("#divRate").append("Dividend Rate:  " + response.stats.dividendRate);
+
+        //Div yield
+        $("#divYield").append("Dividend Yield:  " + response.stats.dividendYield);
+
+        // EPS
+        $("#eps").append("EPS:  " + response.stats.ttmEPS);
+
+        // Beta
+        $("#beta").append("Beta:  " + response.stats.beta);
+
+
 
 };
 
@@ -115,19 +138,27 @@ function addNews(response) {
 
 
 
-function grabURL() {
 
-    var ticker = "aapl";
-    var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=quote,news,chart&range=1m&last=10";
+
+
+  function grabURL () {
+      
+    var ticker = "aapl";  
+    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials?period=annual,stats,logo,peers,&range=1m&last=10";
+    // var logoURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/logo";
+    // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
 
     $.ajax({
-        url: queryURL,
+        url: finURL,
         method: "GET"
     }).then(function (response) {
         companyData(response);
         peerNewsData(response);
-        finData(response);
+
+        finRatios(response);
+        // addLogo(response);
+        console.log(response);
 
         var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
 
@@ -155,6 +186,14 @@ function grabURL() {
 
 
 
+
+
+        
+        
+       
+        
+      }); 
+        
 
 
 }
