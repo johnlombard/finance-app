@@ -210,30 +210,6 @@ function addNews(response) {
 
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-       
-        
-      }); 
-        
-
-
 }
 
 grabURL();
