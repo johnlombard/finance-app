@@ -230,10 +230,10 @@ function addNews(response) {
         
        
         
-      }); 
+      }; 
         
 
 
-}
+
 
 grabURL();
