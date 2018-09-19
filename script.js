@@ -68,9 +68,11 @@ function companyData(response) {
 };
 
 // Add Logo
-function addLogo () {
-    // Adds logo TODO
-};
+// function addLogo (response) {
+//     // Adds logo TODO
+   
+
+// };
 
 
 // Peer and News information
@@ -83,7 +85,7 @@ function peerNewsData (response) {
 };
 
 // Ratios and other financial data
-function finData (response) {
+function finRatios (response) {
         //52 Week High
         $("#high").append("52 Week High:  " + response.quote.week52High);
 
@@ -92,6 +94,20 @@ function finData (response) {
 
         // PE ratio
         $("#pe").append("P/E Ratio:  " + response.quote.peRatio);
+
+        //Div rate
+        $("#divRate").append("Dividend Rate:  " + response.stats.dividendRate);
+
+        //Div yield
+        $("#divYield").append("Dividend Yield:  " + response.stats.dividendYield);
+
+        // EPS
+        $("#eps").append("EPS:  " + response.stats.ttmEPS);
+
+        // Beta
+        $("#beta").append("Beta:  " + response.stats.beta);
+
+
 
 };
 
@@ -104,33 +120,24 @@ function finData (response) {
   function grabURL () {
       
     var ticker = "aapl";  
-    var queryURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=quote,news,chart&range=1m&last=10";
-      
+    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials?period=annual,stats,logo,peers,&range=1m&last=10";
+    // var logoURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/logo";
+    // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
     $.ajax({
-        url: queryURL,
+        url: finURL,
         method: "GET"
       }).then( function(response) {
         companyData(response);
         peerNewsData(response);
-        finData(response);
+        finRatios(response);
+        // addLogo(response);
+        console.log(response);
+        
+       
+        
       }); 
         
-
-
-        
-
-        
-
-       
-
- 
-        
-        
-       
-       
-        
-
 
     
   }
