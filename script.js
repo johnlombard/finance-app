@@ -104,6 +104,10 @@ function finRatios (response) {
         // EPS
         $("#eps").append("EPS:  " + response.stats.ttmEPS);
 
+        // pricetosales
+        // pricetobook
+
+
         // Beta
         $("#beta").append("Beta:  " + response.stats.beta);
 
@@ -120,8 +124,10 @@ function finRatios (response) {
 function financials (response) {
     // revenue
     // TODO Change format
-
     $("#revenue").append("Revenue:  " + response.stats.revenue);
+
+    // cash
+    $("#cash").append("Cash:  " + response.stats.cash);
 
 
     // debt
