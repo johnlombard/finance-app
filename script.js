@@ -70,11 +70,14 @@ function companyData(response) {
 // Add Logo
 
 
-// function addLogo (response) {
-//     // Adds logo TODO
-   
+function addLogo(response) {
 
-// };
+    logoImage = $("<img>");
+    logoImage.attr("src", response.logo.url);
+    logoImage.attr("width", 50);
+    $("#logo").append(logoImage);
+
+};
 
 
 
@@ -91,9 +94,9 @@ function peerNewsData(response) {
 
 
 
-function finRatios (response) {
-        //52 Week High
-        $("#high").append("52 Week High:  " + response.quote.week52High);
+function finRatios(response) {
+    //52 Week High
+    $("#high").append("52 Week High:  " + response.quote.week52High);
 
 
     //52 Week Low
@@ -102,33 +105,33 @@ function finRatios (response) {
     // PE ratio
     $("#pe").append("P/E Ratio:  " + response.quote.peRatio);
 
-        //Div rate
-        $("#divRate").append("Dividend Rate:  " + response.stats.dividendRate);
+    //Div rate
+    $("#divRate").append("Dividend Rate:  " + response.stats.dividendRate);
 
-        //Div yield
-        $("#divYield").append("Dividend Yield:  " + response.stats.dividendYield);
+    //Div yield
+    $("#divYield").append("Dividend Yield:  " + response.stats.dividendYield);
 
-        // EPS
-        $("#eps").append("EPS:  " + response.stats.ttmEPS);
+    // EPS
+    $("#eps").append("EPS:  " + response.stats.ttmEPS);
 
-        // pricetosales
-        // pricetobook
+    // pricetosales
+    // pricetobook
 
 
-        // Beta
-        $("#beta").append("Beta:  " + response.stats.beta);
+    // Beta
+    $("#beta").append("Beta:  " + response.stats.beta);
 
-        //Market Cap
-        // CHANGE FORMAT
-        $("#marketCap").append("Market Capitlization:  " + response.stats.marketcap);
+    //Market Cap
+    // CHANGE FORMAT
+    $("#marketCap").append("Market Capitlization:  " + response.stats.marketcap);
 
-        // Short Ratio
-        $("#shortRatio").append("Short Ratio:  " + response.stats.shortRatio);
+    // Short Ratio
+    $("#shortRatio").append("Short Ratio:  " + response.stats.shortRatio);
 };
 
 
 // adding the financials
-function financials (response) {
+function financials(response) {
     // revenue
     // TODO Change format
     $("#revenue").append("Revenue:  " + response.stats.revenue);
@@ -179,9 +182,9 @@ function addNews(response) {
 
 
 
-  function grabURL () {
-      
-    var ticker = "aapl";  
+function grabURL() {
+
+    var ticker = "aapl";
     var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials?period=annual,stats,logo,peers,&range=1m&last=10";
     // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
@@ -195,7 +198,7 @@ function addNews(response) {
 
         finRatios(response);
         financials(response);
-        // addLogo(response);
+        addLogo(response);
         console.log(response);
 
         var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
@@ -226,12 +229,12 @@ function addNews(response) {
 
 
 
-        
-        
-       
-        
-      }; 
-        
+
+
+
+
+};
+
 
 
 
