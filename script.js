@@ -70,11 +70,16 @@ function companyData(response) {
 // Add Logo
 
 
-// function addLogo (response) {
-//     // Adds logo TODO
 
 
-// };
+function addLogo(response) {
+
+    logoImage = $("<img>");
+    logoImage.attr("src", response.logo.url);
+    logoImage.attr("width", 50);
+    $("#logo").append(logoImage);
+
+};
 
 
 
@@ -93,6 +98,7 @@ function peerNewsData(response) {
 
 function finRatios(response) {
     //52 Week High
+
     $("#high").text("52 Week High:  " + response.quote.week52High);
 
 
@@ -104,6 +110,7 @@ function finRatios(response) {
 
     //Div rate
     $("#divRate").text("Dividend Rate:  " + response.stats.dividendRate);
+
 
     //Div yield
     $("#divYield").text("Dividend Yield:  " + response.stats.dividendYield);
@@ -118,8 +125,10 @@ function finRatios(response) {
     // CHANGE FORMAT
     $("#marketCap").text("Market Capitlization:  " + response.stats.marketcap);
 
+
     // Short Ratio
     $("#shortRatio").text("Short Ratio:  " + response.stats.shortRatio);
+
 
     // pricetosales
     $("#priceToSales").text("Price to Sales:  " + response.stats.priceToSales);
@@ -127,12 +136,12 @@ function finRatios(response) {
     // pricetobook
     $("#priceToBook").text("Price to Book:  " + response.stats.priceToBook);
 
-
 };
 
 
 // adding the financials
 function financials(response) {
+
 
     // TODO THIS IS FOR THE QUARTERLY REPORTS
 //     for (i = 0; i <= 3; i++) {
@@ -165,6 +174,7 @@ function financials(response) {
 //     };
 
      // revenue
+
     // TODO Change format
     $("#revenue").text("Revenue:  " + response.stats.revenue);
 
@@ -218,6 +228,7 @@ function addNews(response) {
 
 
 function grabURL() {
+
     $("#submit").on("click", function (event) {
 
         event.preventDefault()
@@ -228,6 +239,7 @@ function grabURL() {
     
     var ticker = searchTerm;
     var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
+
     // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
 
@@ -240,7 +252,7 @@ function grabURL() {
 
         finRatios(response);
         financials(response);
-        // addLogo(response);
+        addLogo(response);
         console.log(response);
 
         var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
@@ -299,7 +311,15 @@ grabURL();
         // operatingExpense	number
         // operatingIncome	number
 
+
 // operatingRevenue	number
+
+
+
+
+
+};
+
 
 
 // netIncome	number
