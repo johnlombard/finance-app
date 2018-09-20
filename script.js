@@ -113,17 +113,17 @@ function finRatios(response) {
 
 
     //Div yield
-    $("#divYield").text("Dividend Yield:  " + response.stats.dividendYield);
+    $("#divYield").text("Dividend Yield:  " + rounding(response.stats.dividendYield));
 
     // EPS
     $("#eps").text("EPS:  " + response.stats.ttmEPS);
 
     //beta
-    $("#beta").text("Beta:  " + response.stats.beta);
+    $("#beta").text("Beta:  " + rounding(response.stats.beta));
 
     //market Cap
     // CHANGE FORMAT
-    $("#marketCap").text("Market Capitlization:  " + response.stats.marketcap);
+    $("#marketCap").text("Market Capitlization:  " + addCommas(response.stats.marketcap));
 
 
     // Short Ratio
@@ -131,7 +131,7 @@ function finRatios(response) {
 
 
     // pricetosales
-    $("#priceToSales").text("Price to Sales:  " + response.stats.priceToSales);
+    $("#priceToSales").text("Price to Sales:  " + rounding(response.stats.priceToSales));
 
     // pricetobook
     $("#priceToBook").text("Price to Book:  " + response.stats.priceToBook);
@@ -176,17 +176,17 @@ function financials(response) {
      // revenue
 
     // TODO Change format
-    $("#revenue").text("Revenue:  " + response.stats.revenue);
+    $("#revenue").text("Revenue:  " + addCommas(response.stats.revenue));
 
     // cash
-    $("#cash").text("Cash:  " + response.stats.cash);
+    $("#cash").text("Cash:  " + addCommas(response.stats.cash));
 
 
     // debt
-    $("#debt").text("Debt:  " + response.stats.debt);
+    $("#debt").text("Debt:  " + addCommas(response.stats.debt));
 
     // Gross Profit
-    $("#grossProfit").text("Gross Profit:  " + response.stats.grossProfit);
+    $("#grossProfit").text("Gross Profit:  " + addCommas(response.stats.grossProfit));
 
     // Return on Assets
     $("#roa").text("Return on Assets:  " + response.stats.returnOnAssets);
@@ -220,7 +220,13 @@ function addNews(response) {
     }
 }
 
+function addCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
+function rounding(number) {
+    return Math.round(number * 100) / 100;
+}
 
 
 
