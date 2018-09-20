@@ -39,35 +39,37 @@
 
 
 // on click of the submit button gathers information selected in the search bar
-$("#submit").on("click", function (event) {
+// $("#submit").on("click", function (event) {
 
-    event.preventDefault()
+//     event.preventDefault()
 
-    var searchTerm = $("#search").val().trim();
-    console.log(searchTerm);
-});
+//     var searchTerm = $("#search").val().trim();
+//     console.log(searchTerm);
+// });
 
 // Company information
 function companyData(response) {
 
 
     // add company name
-    $("#name").append("Company Name: " + response.quote.companyName);
+    $("#name").text("Company Name: " + response.quote.companyName);
 
     // add ticker and exchange
-    $("#xticker").append(response.quote.primaryExchange + ": " + response.quote.symbol);
+    $("#xticker").text(response.quote.primaryExchange + ": " + response.quote.symbol);
 
     //price
-    $("#price").append("Price:  " + response.quote.latestPrice);
+    $("#price").text("Price:  " + response.quote.latestPrice);
 
     //amount change
-    $("#priceChange").append("Price Change:  " + response.quote.change);
+    $("#priceChange").text("Price Change:  " + response.quote.change);
 
     //percent change 
-    $("#percentChange").append("Percent Change:  " + (response.quote.changePercent * 100) + "%");
+    $("#percentChange").text("Percent Change:  " + (response.quote.changePercent * 100) + "%");
 };
 
 // Add Logo
+
+
 
 
 function addLogo(response) {
@@ -84,7 +86,7 @@ function addLogo(response) {
 // Peer and News information
 function peerNewsData(response) {
     //add company details
-    $("#sector").append("Sector: " + response.quote.sector);
+    $("#sector").text("Sector: " + response.quote.sector);
 
     // add headlines TODO
 
@@ -96,70 +98,113 @@ function peerNewsData(response) {
 
 function finRatios(response) {
     //52 Week High
-    $("#high").append("52 Week High:  " + response.quote.week52High);
+
+    $("#high").text("52 Week High:  " + response.quote.week52High);
 
 
     //52 Week Low
-    $("#low").append("52 Week Low:  " + response.quote.week52Low);
+    $("#low").text("52 Week Low:  " + response.quote.week52Low);
 
     // PE ratio
-    $("#pe").append("P/E Ratio:  " + response.quote.peRatio);
+    $("#pe").text("P/E Ratio:  " + response.quote.peRatio);
 
     //Div rate
-    $("#divRate").append("Dividend Rate:  " + response.stats.dividendRate);
+    $("#divRate").text("Dividend Rate:  " + response.stats.dividendRate);
+
 
     //Div yield
-    $("#divYield").append("Dividend Yield:  " + response.stats.dividendYield);
+    $("#divYield").text("Dividend Yield:  " + response.stats.dividendYield);
 
     // EPS
-    $("#eps").append("EPS:  " + response.stats.ttmEPS);
+    $("#eps").text("EPS:  " + response.stats.ttmEPS);
 
-    // pricetosales
-    // pricetobook
+    //beta
+    $("#beta").text("Beta:  " + response.stats.beta);
 
-
-    // Beta
-    $("#beta").append("Beta:  " + response.stats.beta);
-
-    //Market Cap
+    //market Cap
     // CHANGE FORMAT
-    $("#marketCap").append("Market Capitlization:  " + response.stats.marketcap);
+    $("#marketCap").text("Market Capitlization:  " + response.stats.marketcap);
+
 
     // Short Ratio
-    $("#shortRatio").append("Short Ratio:  " + response.stats.shortRatio);
+    $("#shortRatio").text("Short Ratio:  " + response.stats.shortRatio);
+
+
+    // pricetosales
+    $("#priceToSales").text("Price to Sales:  " + response.stats.priceToSales);
+
+    // pricetobook
+    $("#priceToBook").text("Price to Book:  " + response.stats.priceToBook);
+
 };
 
 
 // adding the financials
 function financials(response) {
-    // revenue
+
+
+    // TODO THIS IS FOR THE QUARTERLY REPORTS
+//     for (i = 0; i <= 3; i++) {
+
+//     // Report Date
+//     $("#quarterData").append(
+//         "Quarter " + [i+1] + ": " + response.financials.financials[i].reportDate + "<br>" + 
+//         "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>" +
+//         "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>");
+//     // IS
+//         // Revenue 
+//     console.log("Quarter " + [i+1] + "Total Revenue: " + response.financials.financials[i].totalRevenue)
+//     console.log("Quarter " + [i+1] + "Cost of Revenue: " + response.financials.financials[i].costOfRevenue)
+//     console.log("Quarter " + [i+1] + "Gross: " + response.financials.financials[i].grossProfit)
+//     console.log("---------------------------")
+
+//         // Operating Expenses
+//             // R&D
+//             console.log("---------------------------")
+//             console.log("Quarter " + [i+1] + "RD: " + response.financials.financials[i].researchAndDevelopment)
+//             // Operating Expense
+//             console.log("Quarter " + [i+1] + "Operating Expenses: " + response.financials.financials[i].operatingExpense)
+//             // Operating Income
+//             console.log("Quarter " + [i+1] + "Operating Income: " + response.financials.financials[i].operatingIncome)
+//  console.log("---------------------------")
+
+
+
+
+//     };
+
+     // revenue
+
     // TODO Change format
-    $("#revenue").append("Revenue:  " + response.stats.revenue);
+    $("#revenue").text("Revenue:  " + response.stats.revenue);
 
     // cash
-    $("#cash").append("Cash:  " + response.stats.cash);
+    $("#cash").text("Cash:  " + response.stats.cash);
 
 
     // debt
-    $("#debt").append("Debt:  " + response.stats.debt);
+    $("#debt").text("Debt:  " + response.stats.debt);
 
     // Gross Profit
-    $("#grossProfit").append("Gross Profit:  " + response.stats.grossProfit);
+    $("#grossProfit").text("Gross Profit:  " + response.stats.grossProfit);
 
     // Return on Assets
-    $("#roa").append("Return on Assets:  " + response.stats.returnOnAssets);
+    $("#roa").text("Return on Assets:  " + response.stats.returnOnAssets);
 
     // Return on Capital
-    $("#roe").append("Return on Equity:  " + response.stats.returnOnEquity);
+    $("#roe").text("Return on Equity:  " + response.stats.returnOnEquity);
 
 
     // ProfitMargin
-    $("#profitMargin").append("Profit Margin:  " + response.stats.profitMargin);
-
+    $("#profitMargin").text("Profit Margin:  " + response.stats.profitMargin);
 
 };
 
 
+
+
+
+// NEED TO RESET THIS WHEN SEARCHING FOR NEW COMPANY
 function addNews(response) {
     for (i = 0; i < 4; i++) {
         var articleContainer = $("<li>");
@@ -184,8 +229,17 @@ function addNews(response) {
 
 function grabURL() {
 
-    var ticker = "aapl";
-    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials?period=annual,stats,logo,peers,&range=1m&last=10";
+    $("#submit").on("click", function (event) {
+
+        event.preventDefault()
+    
+        var searchTerm = $("#search").val().trim();
+        console.log(searchTerm);
+   
+    
+    var ticker = searchTerm;
+    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
+
     // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
 
@@ -210,7 +264,7 @@ function grabURL() {
             console.log(response);
             addNews(response);
         });
-
+    });
     });
 
 
@@ -240,3 +294,45 @@ function grabURL() {
 
 
 grabURL();
+
+
+
+
+
+// John's notes for financials
+// IS
+    // Revenue
+        // totalRevenue	number
+        // costOfRevenue	number
+        // EQUAL grossProfit	number
+
+    // Operating Expense
+        // researchAndDevelopment	number
+        // operatingExpense	number
+        // operatingIncome	number
+
+
+// operatingRevenue	number
+
+
+
+
+
+};
+
+
+
+// netIncome	number
+
+
+// currentAssets	number
+// totalAssets	number
+// totalLiabilities	number
+// currentCash	number
+// currentDebt	number
+// totalCash	number
+// totalDebt	number
+// shareholderEquity	number
+// cashChange	number
+// cashFlow	number
+// operatingGainsLosses
