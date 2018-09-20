@@ -77,7 +77,7 @@ function addLogo(response) {
     logoImage = $("<img>");
     logoImage.attr("src", response.logo.url);
     logoImage.attr("width", 50);
-    $("#logo").append(logoImage);
+    $("#logo").html(logoImage);
 
 };
 
@@ -241,7 +241,9 @@ function grabURL() {
     
         var searchTerm = $("#search").val().trim();
         console.log(searchTerm);
-   
+
+        // clears articles from previous company
+        $("#articles").html("");
     
     var ticker = searchTerm;
     var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
@@ -319,10 +321,6 @@ grabURL();
 
 
 // operatingRevenue	number
-
-
-
-
 
 
 
