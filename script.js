@@ -64,7 +64,7 @@ function companyData(response) {
     $("#priceChange").text("Price Change:  " + response.quote.change);
 
     //percent change 
-    $("#percentChange").text("Percent Change:  " + (response.quote.changePercent * 100) + "%");
+    $("#percentChange").text("Percent Change:  " + rounding(response.quote.changePercent * 100) + "%");
 };
 
 // Add Logo
@@ -99,11 +99,11 @@ function peerNewsData(response) {
 function finRatios(response) {
     //52 Week High
 
-    $("#high").text("52 Week High:  " + response.quote.week52High);
+    $("#high").text("52 Week High:  " + rounding(response.quote.week52High));
 
 
     //52 Week Low
-    $("#low").text("52 Week Low:  " + response.quote.week52Low);
+    $("#low").text("52 Week Low:  " + rounding(response.quote.week52Low));
 
     // PE ratio
     $("#pe").text("P/E Ratio:  " + response.quote.peRatio);
@@ -116,7 +116,7 @@ function finRatios(response) {
     $("#divYield").text("Dividend Yield:  " + rounding(response.stats.dividendYield));
 
     // EPS
-    $("#eps").text("EPS:  " + response.stats.ttmEPS);
+    $("#eps").text("EPS:  " + rounding(response.stats.ttmEPS));
 
     //beta
     $("#beta").text("Beta:  " + rounding(response.stats.beta));
