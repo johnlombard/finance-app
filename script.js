@@ -116,7 +116,7 @@ function finRatios(response) {
     $("#divYield").text("Dividend Yield:  " + rounding(response.stats.dividendYield));
 
     // EPS
-    $("#eps").text("EPS:  " + response.stats.ttmEPS);
+    $("#eps").text("EPS:  " + rounding(response.stats.ttmEPS));
 
     //beta
     $("#beta").text("Beta:  " + rounding(response.stats.beta));
