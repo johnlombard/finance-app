@@ -168,57 +168,57 @@ function financials(response) {
             // Revenue header needed
 
             // Total Revenue
-            "Total Revenue: " + response.financials.financials[i].totalRevenue + "<br>" +
+            "Total Revenue: " + addCommas(response.financials.financials[i].totalRevenue) + "<br>" +
             //Cost of Revenue
 
-            "Cost of Revenue: " + response.financials.financials[i].costOfRevenue + "<br>" +
+            "Cost of Revenue: " + addCommas(response.financials.financials[i].costOfRevenue) + "<br>" +
 
             //Gross Profit BOLD THIS
-            "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>" +
+            "Gross Profit:  " + addCommas(response.financials.financials[i].grossProfit) + "<br>" +
             // Operating Expenses Header Needed
 
             //Research and Development
-            "Research & Development: " + response.financials.financials[i].researchAndDevelopment + "<br>" +
+            "Research & Development: " + addCommas(response.financials.financials[i].researchAndDevelopment) + "<br>" +
 
             // Operating Expenses DOUBLE CHECK THIS NUMBER
-            "Operating Expenses: " + response.financials.financials[i].operatingExpense + "<br>" +
+            "Operating Expenses: " + addCommas(response.financials.financials[i].operatingExpense) + "<br>" +
 
             //Operating Income Bold 
-            "Operating Income: " + response.financials.financials[i].operatingIncome + "<br>"
+            "Operating Income: " + addCommas(response.financials.financials[i].operatingIncome) + "<br>"
             //*** There are no Income from Continuing Operations 
 
             // Operating Revenue DOUBLE CHECK POSITION
-            + "Operating Revenue: " + response.financials.financials[i].operatingRevenue + "<br>" +
+            + "Operating Revenue: " + addCommas(response.financials.financials[i].operatingRevenue) + "<br>" +
             "Operating Gains/Losses: " + response.financials.financials[i].operatingGainsLosses + "<br>" +
 
             // Balance Sheet Header This
             // Assets BOLD
 
             // Current Assets
-            "Current Assets: " + response.financials.financials[i].currentAssets + "<br>" +
+            "Current Assets: " + addCommas(response.financials.financials[i].currentAssets) + "<br>" +
             
             // Current Cash
-            "Current Cash: " + response.financials.financials[i].currentCash + "<br>" +
+            "Current Cash: " + addCommas(response.financials.financials[i].currentCash) + "<br>" +
 
             // Total Cash
-            "Total Cash: " + response.financials.financials[i].totalCash + "<br>" +
+            "Total Cash: " + addCommas(response.financials.financials[i].totalCash) + "<br>" +
 
             // Total Assets
-            "Total Assets: " + response.financials.financials[i].totalAssets + "<br>" +
+            "Total Assets: " + addCommas(response.financials.financials[i].totalAssets) + "<br>" +
 
             // Liabilities BOLD
 
             // Current Debt
-            "Current Debt: " + response.financials.financials[i].currentDebt + "<br>" +
+            "Current Debt: " + addCommas(response.financials.financials[i].currentDebt) + "<br>" +
 
             // Total Debt
-            "Total Debt: " + response.financials.financials[i].totalDebt + "<br>" +
+            "Total Debt: " + addCommas(response.financials.financials[i].totalDebt) + "<br>" +
 
             // Total Liabilities
-            "Total Liabilities : " + response.financials.financials[i].totalLiabilities + "<br>" +
+            "Total Liabilities : " +response.financials.financials[i].totalLiabilities + "<br>" +
 
             // Shareholder Equity TODO Bold
-            "Shareholder Equity: " + response.financials.financials[i].shareholderEquity + "<br>" +
+            "Shareholder Equity: " + addCommas(response.financials.financials[i].shareholderEquity) + "<br>" +
             // TODO NEED NET OUTSTANDING ASSETS???
 
 
@@ -242,7 +242,7 @@ function financials(response) {
 
             // Net Income Bold This
             // Net Income
-            + "Net Income: " + response.financials.financials[i].netIncome + "<br>"
+             "Net Income: " + addCommas(response.financials.financials[i].netIncome) + "<br>"
 
 
 
