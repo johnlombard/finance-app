@@ -18,15 +18,23 @@ html, body {
     overflow-x: hidden;
 }
 
-h1 {
+#company {
     font-size: 4rem; 
     color: #fff;
-    position: absolute;
-    left: 50%;
-    top: 20%;
+    position: relative;
+    left: 70%;
     transform: translateX(-50%);
     white-space: nowrap;
 }
+#Financial {
+  font-size: 4rem; 
+  color: #fff;
+  position: relative;
+  left: 90%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
 
 .split.left .button:hover {
   background-color: var(--left-button-hover-color);
@@ -56,6 +64,24 @@ h1 {
   left:0;
   background: url('https://image.ibb.co/m56Czw/designer.jpg') center center no-repeat;
   background-size: cover;
+  z-index: 1;
+}
+
+#firstpanel {
+  position: relative;
+  z-index: 2;
+}
+#secondpanel {
+  position: relative;
+  z-index: 2;
+}
+#thirdpanel {
+  position: relative;
+  z-index: 2;
+}
+#fourthpanel {
+  position: relative;
+  z-index: 2;
 }
 
 .split.left:before {

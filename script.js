@@ -1,36 +1,3 @@
-//search for company
-//grab company information
-
-//GRABBING INFO
-// HTTP /stock/aapl/company
-//Exchange + Ticker
-// Logo
-// HTTP /stock/aapl/logo
-//Price 
-// %change
-//CEO
-// push to html
-
-// grab Peers 
-// HTTP /stock/aapl/peers
-// Peers (with their ticker and price)
-
-// Grab sector
-// HTTP /stock/market/sector-performance
-//Sector with performance
-
-//grab news
-// HTTP /stock/aapl/news
-//GRABBING INFO
-//news
-//push to html
-
-//grab Fin stats
-// HTTP /stock/aapl/stats
-//PE
-// Market Cap
-//52 H/L
-//More ratios (under key stats)
 
 
 // Ideas:
@@ -38,14 +5,18 @@
 
 
 
-// on click of the submit button gathers information selected in the search bar
-// $("#submit").on("click", function (event) {
 
-//     event.preventDefault()
+var config = {
+    apiKey: "AIzaSyB9TxxGUuGiUSxmRqS5e33OLIvB7zkH-sM",
+    authDomain: "finance-app-a3ffe.firebaseapp.com",
+    databaseURL: "https://finance-app-a3ffe.firebaseio.com",
+    projectId: "finance-app-a3ffe",
+    storageBucket: "finance-app-a3ffe.appspot.com",
+    messagingSenderId: "232411442269"
+};
+firebase.initializeApp(config);
 
-//     var searchTerm = $("#search").val().trim();
-//     console.log(searchTerm);
-// });
+var dataRef = firebase.database();
 
 
 // Company information
@@ -56,7 +27,8 @@ function companyData(response) {
     $("#name").text("Company Name: " + response.quote.companyName);
 
     // add ticker and exchange
-    $("#xticker").text(response.quote.primaryExchange + ": " + response.quote.symbol);
+    $("#exchange").text(response.quote.primaryExchange);
+    $("#ticker").text(response.quote.symbol);
 
     //price
     $("#price").text("Price:  " + response.quote.latestPrice);
@@ -168,57 +140,61 @@ function financials(response) {
             // Revenue header needed
 
             // Total Revenue
-            "Total Revenue: " + response.financials.financials[i].totalRevenue + "<br>" +
+            "Total Revenue: " + addCommas(response.financials.financials[i].totalRevenue) + "<br>" +
             //Cost of Revenue
 
-            "Cost of Revenue: " + response.financials.financials[i].costOfRevenue + "<br>" +
+            "Cost of Revenue: " + addCommas(response.financials.financials[i].costOfRevenue) + "<br>" +
 
             //Gross Profit BOLD THIS
-            "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>" +
+            "Gross Profit:  " + addCommas(response.financials.financials[i].grossProfit) + "<br>" +
             // Operating Expenses Header Needed
 
             //Research and Development
-            "Research & Development: " + response.financials.financials[i].researchAndDevelopment + "<br>" +
+            "Research & Development: " + addCommas(response.financials.financials[i].researchAndDevelopment) + "<br>" +
 
             // Operating Expenses DOUBLE CHECK THIS NUMBER
-            "Operating Expenses: " + response.financials.financials[i].operatingExpense + "<br>" +
+            "Operating Expenses: " + addCommas(response.financials.financials[i].operatingExpense) + "<br>" +
 
             //Operating Income Bold 
-            "Operating Income: " + response.financials.financials[i].operatingIncome + "<br>"
+            "Operating Income: " + addCommas(response.financials.financials[i].operatingIncome) + "<br>"
             //*** There are no Income from Continuing Operations 
 
             // Operating Revenue DOUBLE CHECK POSITION
-            + "Operating Revenue: " + response.financials.financials[i].operatingRevenue + "<br>" +
+            + "Operating Revenue: " + addCommas(response.financials.financials[i].operatingRevenue) + "<br>" +
             "Operating Gains/Losses: " + response.financials.financials[i].operatingGainsLosses + "<br>" +
 
             // Balance Sheet Header This
             // Assets BOLD
 
             // Current Assets
-            "Current Assets: " + response.financials.financials[i].currentAssets + "<br>" +
+
+
+
+            "Current Assets: " + addCommas(response.financials.financials[i].currentAssets) + "<br>" +
+
 
             // Current Cash
-            "Current Cash: " + response.financials.financials[i].currentCash + "<br>" +
+            "Current Cash: " + addCommas(response.financials.financials[i].currentCash) + "<br>" +
 
             // Total Cash
-            "Total Cash: " + response.financials.financials[i].totalCash + "<br>" +
+            "Total Cash: " + addCommas(response.financials.financials[i].totalCash) + "<br>" +
 
             // Total Assets
-            "Total Assets: " + response.financials.financials[i].totalAssets + "<br>" +
+            "Total Assets: " + addCommas(response.financials.financials[i].totalAssets) + "<br>" +
 
             // Liabilities BOLD
 
             // Current Debt
-            "Current Debt: " + response.financials.financials[i].currentDebt + "<br>" +
+            "Current Debt: " + addCommas(response.financials.financials[i].currentDebt) + "<br>" +
 
             // Total Debt
-            "Total Debt: " + response.financials.financials[i].totalDebt + "<br>" +
+            "Total Debt: " + addCommas(response.financials.financials[i].totalDebt) + "<br>" +
 
             // Total Liabilities
             "Total Liabilities : " + response.financials.financials[i].totalLiabilities + "<br>" +
 
             // Shareholder Equity TODO Bold
-            "Shareholder Equity: " + response.financials.financials[i].shareholderEquity + "<br>" +
+            "Shareholder Equity: " + addCommas(response.financials.financials[i].shareholderEquity) + "<br>" +
             // TODO NEED NET OUTSTANDING ASSETS???
 
 
@@ -242,7 +218,7 @@ function financials(response) {
 
             // Net Income Bold This
             // Net Income
-            + "Net Income: " + response.financials.financials[i].netIncome + "<br>"
+            "Net Income: " + addCommas(response.financials.financials[i].netIncome) + "<br>"
 
 
 
@@ -282,6 +258,7 @@ function financials(response) {
 
 
 
+
 // NEED TO RESET THIS WHEN SEARCHING FOR NEW COMPANY
 function addNews(response) {
     for (i = 0; i < 4; i++) {
@@ -306,6 +283,44 @@ function rounding(number) {
     return Math.round(number * 100) / 100;
 };
 
+dataRef.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
+    $("#watchlist").append("<tr><td>" +
+        childSnapshot.val().companyName +
+        " </td><td> " + childSnapshot.val().price +
+        " </td><td> " + childSnapshot.val().percentChange +
+        " </td><td> " + childSnapshot.val().exchange +
+        " </td><td> " + childSnapshot.val().sector +
+        " </td>" + 
+        "<td><button class='viewButton' onclick='viewButton(" + '"' + childSnapshot.val().ticker + '"' + ")'>View</button></td>" +
+        "</tr> ");
+}, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
+
+function viewButton (ticker) {
+
+    var searchTerm = ticker;
+    console.log(searchTerm);
+
+    // clears articles from previous company
+    $("#articles").html("");
+
+    var ticker = searchTerm;
+    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
+    var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
+
+
+    $.ajax({
+        url: finURL,
+        method: "GET",
+        error: function () {
+            $("#error").text("Invalid ticker!")
+        }
+    }).then(function (response) {
+        companyData(response);
+        peerNewsData(response);
+
 
 function chartData(response) {
     for (i = 0; i <= response.length; i++) {
@@ -315,10 +330,35 @@ function chartData(response) {
 };
 
 
+        finRatios(response);
+        financials(response);
+        addLogo(response);
+        console.log(response);
 
 
+        var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
 
-function grabURL() {
+        $.ajax({
+            url: newsUrl,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            addNews(response);
+        });
+
+        $.ajax({
+            url: chartURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+
+
+        });
+    });
+};
+
+
+$(document).ready(function () {
 
     $("#submit").on("click", function (event) {
 
@@ -334,7 +374,6 @@ function grabURL() {
         var ticker = searchTerm;
         var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
         var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
-
 
         $.ajax({
             url: finURL,
@@ -366,6 +405,7 @@ function grabURL() {
                 method: "GET"
             }).then(function (response) {
                 console.log(response);
+
                 // $("#gifs-station").empty(); 
 
                 // sets dimensions of canvas/graph
@@ -533,12 +573,52 @@ function grabURL() {
 
                 chartData(response);
 
+
             });
         });
     });
-};
 
-grabURL();
+
+
+    $("#addToList").on("click", function (event) {
+        event.preventDefault();
+        if ($("#name").text() !== "") {
+            dataRef.ref().push({
+
+                companyName: $("#name").text(),
+                price: $("#price").text(),
+                percentChange: $("#percentChange").text(),
+                exchange: $("#exchange").text(),
+                sector: $("#sector").text(),
+                ticker: $("#ticker").text()
+            });
+        };
+    });
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
 
 
 
