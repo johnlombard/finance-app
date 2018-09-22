@@ -1,36 +1,3 @@
-//search for company
-//grab company information
-
-//GRABBING INFO
-// HTTP /stock/aapl/company
-//Exchange + Ticker
-// Logo
-// HTTP /stock/aapl/logo
-//Price 
-// %change
-//CEO
-// push to html
-
-// grab Peers 
-// HTTP /stock/aapl/peers
-// Peers (with their ticker and price)
-
-// Grab sector
-// HTTP /stock/market/sector-performance
-//Sector with performance
-
-//grab news
-// HTTP /stock/aapl/news
-//GRABBING INFO
-//news
-//push to html
-
-//grab Fin stats
-// HTTP /stock/aapl/stats
-//PE
-// Market Cap
-//52 H/L
-//More ratios (under key stats)
 
 
 // Ideas:
@@ -38,14 +5,6 @@
 
 
 
-// on click of the submit button gathers information selected in the search bar
-// $("#submit").on("click", function (event) {
-
-//     event.preventDefault()
-
-//     var searchTerm = $("#search").val().trim();
-//     console.log(searchTerm);
-// });
 
 var config = {
     apiKey: "AIzaSyB9TxxGUuGiUSxmRqS5e33OLIvB7zkH-sM",
@@ -296,6 +255,7 @@ function financials(response) {
 
 
 
+
 // NEED TO RESET THIS WHEN SEARCHING FOR NEW COMPANY
 function addNews(response) {
     for (i = 0; i < 4; i++) {
@@ -433,10 +393,10 @@ $(document).ready(function () {
             }).then(function (response) {
                 console.log(response);
 
-
             });
         });
     });
+
 
     $("#addToList").on("click", function (event) {
         event.preventDefault();
