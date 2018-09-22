@@ -62,9 +62,21 @@ function companyData(response) {
 
     //amount change
     $("#priceChange").text("Price Change:  " + response.quote.change);
+    if (Math.sign(response.quote.change) === -1) {
+        $("#priceChange").css("color", "red");
+    }
+    else {
+        $("#priceChange").css("color", "green");
+    }
 
     //percent change 
     $("#percentChange").text("Percent Change:  " + rounding(response.quote.changePercent * 100) + "%");
+    if (Math.sign(response.quote.changePercent) === -1) {
+        $("#percentChange").css("color", "red");
+    }
+    else {
+        $("#percentChange").css("color", "green");
+    }
 };
 
 // Add Logo
@@ -253,7 +265,10 @@ function grabURL() {
 
     $.ajax({
         url: finURL,
-        method: "GET"
+        method: "GET",
+        error: function() {
+            $("#error").text("Invalid ticker!")
+        }
     }).then(function (response) {
         companyData(response);
         peerNewsData(response);
