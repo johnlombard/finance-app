@@ -1,3 +1,6 @@
 #companyData {
     background-color:lightgrey;
 }
+#error {
+    color: red;
+}

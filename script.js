@@ -265,7 +265,10 @@ function grabURL() {
 
     $.ajax({
         url: finURL,
-        method: "GET"
+        method: "GET",
+        error: function() {
+            $("#error").text("Invalid ticker!")
+        }
     }).then(function (response) {
         companyData(response);
         peerNewsData(response);
