@@ -1,6 +1,42 @@
 #companyData {
     background-color:lightgrey;
+    font-family: 'Open Sans', sans-serif;
 }
 #error {
     color: red;
 }
+
+.chart div {
+    font: 8px sans-serif;
+    background-color:plum;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+    }
+
+
+svg {
+        
+    font: 8px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+path {
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+           
+      

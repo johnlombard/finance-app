@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style/stylesheet.css">
+     <!-- load the d3.js library, store sizing for line chart (svg) -->	
+    <svg></svg> 
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <!-- ADD GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
         <!-- Firebase Watchlist -->
@@ -39,6 +45,7 @@
     </table>
     <form>
         <input type="text" id="search">
+        <!-- Maybe make this a drop down with five most popular tickers -->
         <button id="submit">Test</button>
         <button id="addToList">Add to Watchlist</button>
         <div id="error"></div>
@@ -166,8 +173,11 @@
 
 
 
+<!-- div to store chart -->
+<div class="chart-container"></div>
 
-    <br>
+<br>
+
 </section>   
 
 
