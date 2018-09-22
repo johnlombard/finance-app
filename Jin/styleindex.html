@@ -9,7 +9,7 @@
     <!--Bootstrap & CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Group Project 1</title>
 </head>
@@ -111,21 +111,96 @@
     <div class="container">
 
         <div class="split left">
-            <h1>Company Information</h1>
+            <h1 id="company">Company Information</h1>
+
+            <div class="panel panel-default" id="firstpanel">
+                <!--Add logo ? -->
+                <div class="panel-heading">
+                    <h3 class="panel-title">Company Name</h3>
+                </div>
+                <div class="panel-body">
+                    Company Description
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="secondpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ceo</h3>
+                </div>
+                <div class="panel-body">
+                    Biography 
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="thirdpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Price</h3>
+                </div>
+                <div class="panel-body">
+                    Price Change ($/%)
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="fourthpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Peers</h3>
+                </div>
+                <div class="panel-body">
+                    Competitors
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="fourthpanel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ticketer</h3>
+                    </div>
+                    <div class="panel-body">
+                        exchange
+                        sector (sector performance)
+                    </div>
+                </div>
+        </div>
+        <div class="split right">
+            <h1 id="Financial">Financial</h1>
 
             <div class="panel panel-default" id="firstpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Panel title</h3>
+                    <h3 class="panel-title">Revenue</h3>
                 </div>
                 <div class="panel-body">
                     Panel content
                 </div>
             </div>
 
+            <div class="panel panel-default" id="secondpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Debt</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
 
-        </div>
-        <div class="split right">
-            <h1>Financial</h1>
+            <div class="panel panel-default" id="thirdpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Gross Profit</h3>
+                </div>
+                <div class="panel-body">
+                    Return on Assets
+                    Return on Capital
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="fourthpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Profit Margin</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <!-- Include Kaitlyn's graph -->
         </div>
 
         <div class="bottom-static">
@@ -156,7 +231,6 @@
                         <td>Edinburgh</td>
                         <td>61</td>
                         <td>2011/04/25</td>
-                        <td>$320,800</td>
                     </tr>
                 </tbody>
                 <tfoot>
