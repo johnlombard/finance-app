@@ -11,12 +11,58 @@
     <link rel="stylesheet" href="style/stylesheet.css">
 </head>
 <body>
+        <!-- Firebase Watchlist -->
+<table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <!-- TODO CHANGE THIS TO ACROSS THE WHOLE TABLE -->
+            <tr><th>User Watchlist</th></tr>
+            <tr>
+                <th class="th-sm">Company Name
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Price
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Percent Change
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Exchange
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Sector
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="newstocks">
+            <tr>
+                
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Company Name
+                </th>
+                <th>Ceo
+                </th>
+                <th>Price
+                </th>
+                <th>Percent Change
+                </th>
+                <th>Sector
+                </th>
+            </tr>
+        </tfoot>
+    </table>
     <form>
         <input type="text" id="search">
         <button id="submit">Test</button>
+        <button id="addToList">Add to Watchlist</button>
+        <div id="error"></div>
     </form>
 
 <main>
+
     <!-- Company Information -->
     <section id="companyData">
 
@@ -90,13 +136,23 @@
     <!-- Short Ratio -->
   
     <div id="shortRatio"></div> 
+    
+    <!-- Price To Sales -->
+    <div id="priceToSales"></div>
 
+    <!-- Price To Book -->
+    <div id="priceToBook"></div>
 
 </div>
     <br>
 
 <!-- Financials -->
 <div id="finacials">
+
+    
+    <!-- Report Date Q1 -->
+    <div id="quarterData"></div>
+   
 
     <!-- revenue -->
     <div id="revenue"></div>
@@ -120,9 +176,11 @@
 
 
 
-
+    
 
 </div>
+
+
 
 
     <br>
@@ -131,6 +189,7 @@
 
 </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
