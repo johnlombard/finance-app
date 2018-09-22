@@ -54,8 +54,10 @@ var config = {
     projectId: "finance-app-a3ffe",
     storageBucket: "finance-app-a3ffe.appspot.com",
     messagingSenderId: "232411442269"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
+
+var dataRef = firebase.database();
 
 
 // Company information
@@ -66,7 +68,8 @@ function companyData(response) {
     $("#name").text("Company Name: " + response.quote.companyName);
 
     // add ticker and exchange
-    $("#xticker").text(response.quote.primaryExchange + ": " + response.quote.symbol);
+    $("#exchange").text(response.quote.primaryExchange);
+    $("#ticker").text(response.quote.symbol);
 
     //price
     $("#price").text("Price:  " + response.quote.latestPrice);
@@ -226,7 +229,7 @@ function financials(response) {
             "Total Debt: " + addCommas(response.financials.financials[i].totalDebt) + "<br>" +
 
             // Total Liabilities
-            "Total Liabilities : " +response.financials.financials[i].totalLiabilities + "<br>" +
+            "Total Liabilities : " + response.financials.financials[i].totalLiabilities + "<br>" +
 
             // Shareholder Equity TODO Bold
             "Shareholder Equity: " + addCommas(response.financials.financials[i].shareholderEquity) + "<br>" +
@@ -253,7 +256,7 @@ function financials(response) {
 
             // Net Income Bold This
             // Net Income
-             "Net Income: " + addCommas(response.financials.financials[i].netIncome) + "<br>"
+            "Net Income: " + addCommas(response.financials.financials[i].netIncome) + "<br>"
 
 
 
@@ -317,12 +320,72 @@ function rounding(number) {
     return Math.round(number * 100) / 100;
 }
 
+dataRef.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
+    $("#watchlist").append("<tr><td>" +
+        childSnapshot.val().companyName +
+        " </td><td> " + childSnapshot.val().price +
+        " </td><td> " + childSnapshot.val().percentChange +
+        " </td><td> " + childSnapshot.val().exchange +
+        " </td><td> " + childSnapshot.val().sector +
+        " </td>" + 
+        "<td><button class='viewButton' onclick='viewButton(" + '"' + childSnapshot.val().ticker + '"' + ")'>View</button></td>" +
+        "</tr> ");
+}, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
+
+function viewButton (ticker) {
+
+    var searchTerm = ticker;
+    console.log(searchTerm);
+
+    // clears articles from previous company
+    $("#articles").html("");
+
+    var ticker = searchTerm;
+    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
+    var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
 
 
+    $.ajax({
+        url: finURL,
+        method: "GET",
+        error: function () {
+            $("#error").text("Invalid ticker!")
+        }
+    }).then(function (response) {
+        companyData(response);
+        peerNewsData(response);
+
+        finRatios(response);
+        financials(response);
+        addLogo(response);
+        console.log(response);
+
+        var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
+
+        $.ajax({
+            url: newsUrl,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            addNews(response);
+        });
+
+        $.ajax({
+            url: chartURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
 
 
+        });
+    });
+};
 
-function grabURL() {
+
+$(document).ready(function () {
 
     $("#submit").on("click", function (event) {
 
@@ -342,9 +405,9 @@ function grabURL() {
         $.ajax({
             url: finURL,
             method: "GET",
-            error: function() {
-            $("#error").text("Invalid ticker!")
-        }
+            error: function () {
+                $("#error").text("Invalid ticker!")
+            }
         }).then(function (response) {
             companyData(response);
             peerNewsData(response);
@@ -375,6 +438,22 @@ function grabURL() {
         });
     });
 
+    $("#addToList").on("click", function (event) {
+        event.preventDefault();
+        if ($("#name").text() !== "") {
+            dataRef.ref().push({
+
+                companyName: $("#name").text(),
+                price: $("#price").text(),
+                percentChange: $("#percentChange").text(),
+                exchange: $("#exchange").text(),
+                sector: $("#sector").text(),
+                ticker: $("#ticker").text()
+            });
+        };
+    });
+
+    
 
 
 
@@ -392,16 +471,13 @@ function grabURL() {
 
 
 
-
-
-
-};
+});
 
 
 
 
 
-grabURL();
+
 
 
 
