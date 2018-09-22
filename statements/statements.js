@@ -144,102 +144,37 @@ function finRatios(response) {
 function financials(response) {
 
 
-    for (i = 0; i <= 3; i++) {
+    // TODO THIS IS FOR THE QUARTERLY REPORTS
+//     for (i = 0; i <= 3; i++) {
 
-        // Report Date
-        $("#quarterData").append(
+//     // Report Date
+//     $("#quarterData").append(
+//         "Quarter " + [i+1] + ": " + response.financials.financials[i].reportDate + "<br>" + 
+//         "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>" +
+//         "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>");
+//     // IS
+//         // Revenue 
+//     console.log("Quarter " + [i+1] + "Total Revenue: " + response.financials.financials[i].totalRevenue)
+//     console.log("Quarter " + [i+1] + "Cost of Revenue: " + response.financials.financials[i].costOfRevenue)
+//     console.log("Quarter " + [i+1] + "Gross: " + response.financials.financials[i].grossProfit)
+//     console.log("---------------------------")
 
-            // Quarter Data Change Format
-            response.financials.financials[i].reportDate + "<br>" +
-
-            // IS
-            // Revenue header needed
-
-            // Total Revenue
-            "Total Revenue: " + response.financials.financials[i].totalRevenue + "<br>" +
-            //Cost of Revenue
-
-            "Cost of Revenue: " + response.financials.financials[i].costOfRevenue + "<br>" +
-
-            //Gross Profit BOLD THIS
-            "Gross Profit:  " + response.financials.financials[i].grossProfit + "<br>" +
-            // Operating Expenses Header Needed
-
-            //Research and Development
-            "Research & Development: " + response.financials.financials[i].researchAndDevelopment + "<br>" +
-
-            // Operating Expenses DOUBLE CHECK THIS NUMBER
-            "Operating Expenses: " + response.financials.financials[i].operatingExpense + "<br>" +
-
-            //Operating Income Bold 
-            "Operating Income: " + response.financials.financials[i].operatingIncome + "<br>"
-            //*** There are no Income from Continuing Operations 
-
-            // Operating Revenue DOUBLE CHECK POSITION
-            + "Operating Revenue: " + response.financials.financials[i].operatingRevenue + "<br>" +
-            "Operating Gains/Losses: " + response.financials.financials[i].operatingGainsLosses + "<br>" +
-
-            // Balance Sheet Header This
-            // Assets BOLD
-
-            // Current Assets
-            "Current Assets: " + response.financials.financials[i].currentAssets + "<br>" +
-            
-            // Current Cash
-            "Current Cash: " + response.financials.financials[i].currentCash + "<br>" +
-
-            // Total Cash
-            "Total Cash: " + response.financials.financials[i].totalCash + "<br>" +
-
-            // Total Assets
-            "Total Assets: " + response.financials.financials[i].totalAssets + "<br>" +
-
-            // Liabilities BOLD
-
-            // Current Debt
-            "Current Debt: " + response.financials.financials[i].currentDebt + "<br>" +
-
-            // Total Debt
-            "Total Debt: " + response.financials.financials[i].totalDebt + "<br>" +
-
-            // Total Liabilities
-            "Total Liabilities : " + response.financials.financials[i].totalLiabilities + "<br>" +
-
-            // Shareholder Equity TODO Bold
-            "Shareholder Equity: " + response.financials.financials[i].shareholderEquity + "<br>" +
-            // TODO NEED NET OUTSTANDING ASSETS???
+//         // Operating Expenses
+//             // R&D
+//             console.log("---------------------------")
+//             console.log("Quarter " + [i+1] + "RD: " + response.financials.financials[i].researchAndDevelopment)
+//             // Operating Expense
+//             console.log("Quarter " + [i+1] + "Operating Expenses: " + response.financials.financials[i].operatingExpense)
+//             // Operating Income
+//             console.log("Quarter " + [i+1] + "Operating Income: " + response.financials.financials[i].operatingIncome)
+//  console.log("---------------------------")
 
 
 
 
+//     };
 
-            // currentAssets	number
-            // currentCash	number
-            // totalCash	number
-            // totalAssets	number
-
-            // currentDebt	number
-            // totalDebt	number
-            // totalLiabilities	number
-
-            // shareholderEquity	number
-
-
-            // This maybe it 
-
-
-            // Net Income Bold This
-            // Net Income
-            + "Net Income: " + response.financials.financials[i].netIncome + "<br>"
-
-
-
-
-
-        );
-    };
-
-    // revenue
+     // revenue
 
     // TODO Change format
     $("#revenue").text("Revenue:  " + response.stats.revenue);
@@ -298,50 +233,41 @@ function grabURL() {
     $("#submit").on("click", function (event) {
 
         event.preventDefault()
-
+    
         var searchTerm = $("#search").val().trim();
         console.log(searchTerm);
 
         // clears articles from previous company
         $("#articles").html("");
+    
+    var ticker = searchTerm;
+    var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
 
-        var ticker = searchTerm;
-        var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
-        var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
-        
+    // /stock/aapl/batch?types=quote,news,chart&range=1m&last=1
 
+
+    $.ajax({
+        url: finURL,
+        method: "GET"
+    }).then(function (response) {
+        companyData(response);
+        peerNewsData(response);
+
+        finRatios(response);
+        financials(response);
+        addLogo(response);
+        console.log(response);
+
+        var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
 
         $.ajax({
-            url: finURL,
+            url: newsUrl,
             method: "GET"
         }).then(function (response) {
-            companyData(response);
-            peerNewsData(response);
-
-            finRatios(response);
-            financials(response);
-            addLogo(response);
             console.log(response);
-
-            var newsUrl = 'https://newsapi.org/v2/everything?q=' + response.quote.companyName + '&sortBy=popularity&apiKey=efb4592ca08a4b549ce0f2424f9180dd';
-
-            $.ajax({
-                url: newsUrl,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
-                addNews(response);
-            });
-
-                $.ajax({
-                    url: chartURL,
-                    method: "GET"
-                }).then(function (response) {
-                    console.log(response);
-                    
-    
-            });
+            addNews(response);
         });
+    });
     });
 
 
@@ -387,26 +313,25 @@ grabURL();
         // researchAndDevelopment	number
         // operatingExpense	number
         // operatingIncome	number
-// operatingGainsLosses ***HereOR
+
+
+// operatingRevenue	number
 
 
 
 
 
-
+// netIncome	number
 
 
 // currentAssets	number
-// currentCash	number
-// totalCash	number
 // totalAssets	number
-
-// currentDebt	number
-// totalDebt	number
 // totalLiabilities	number
-
+// currentCash	number
+// currentDebt	number
+// totalCash	number
+// totalDebt	number
 // shareholderEquity	number
-
 // cashChange	number
 // cashFlow	number
 // operatingGainsLosses
