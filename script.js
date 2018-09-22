@@ -63,9 +63,21 @@ function companyData(response) {
 
     //amount change
     $("#priceChange").text("Price Change:  " + response.quote.change);
+    if (Math.sign(response.quote.change) === -1) {
+        $("#priceChange").css("color", "red");
+    }
+    else {
+        $("#priceChange").css("color", "green");
+    }
 
     //percent change 
-    $("#percentChange").text("Percent Change:  " + (response.quote.changePercent * 100) + "%");
+    $("#percentChange").text("Percent Change:  " + rounding(response.quote.changePercent * 100) + "%");
+    if (Math.sign(response.quote.changePercent) === -1) {
+        $("#percentChange").css("color", "red");
+    }
+    else {
+        $("#percentChange").css("color", "green");
+    }
 };
 
 // Add Logo
@@ -100,11 +112,11 @@ function peerNewsData(response) {
 function finRatios(response) {
     //52 Week High
 
-    $("#high").text("52 Week High:  " + response.quote.week52High);
+    $("#high").text("52 Week High:  " + rounding(response.quote.week52High));
 
 
     //52 Week Low
-    $("#low").text("52 Week Low:  " + response.quote.week52Low);
+    $("#low").text("52 Week Low:  " + rounding(response.quote.week52Low));
 
     // PE ratio
     $("#pe").text("P/E Ratio:  " + response.quote.peRatio);
@@ -114,17 +126,17 @@ function finRatios(response) {
 
 
     //Div yield
-    $("#divYield").text("Dividend Yield:  " + response.stats.dividendYield);
+    $("#divYield").text("Dividend Yield:  " + rounding(response.stats.dividendYield));
 
     // EPS
-    $("#eps").text("EPS:  " + response.stats.ttmEPS);
+    $("#eps").text("EPS:  " + rounding(response.stats.ttmEPS));
 
     //beta
-    $("#beta").text("Beta:  " + response.stats.beta);
+    $("#beta").text("Beta:  " + rounding(response.stats.beta));
 
     //market Cap
     // CHANGE FORMAT
-    $("#marketCap").text("Market Capitlization:  " + response.stats.marketcap);
+    $("#marketCap").text("Market Capitlization:  " + addCommas(response.stats.marketcap));
 
 
     // Short Ratio
@@ -132,7 +144,7 @@ function finRatios(response) {
 
 
     // pricetosales
-    $("#priceToSales").text("Price to Sales:  " + response.stats.priceToSales);
+    $("#priceToSales").text("Price to Sales:  " + rounding(response.stats.priceToSales));
 
     // pricetobook
     $("#priceToBook").text("Price to Book:  " + response.stats.priceToBook);
@@ -242,17 +254,17 @@ function financials(response) {
     // revenue
 
     // TODO Change format
-    $("#revenue").text("Revenue:  " + response.stats.revenue);
+    $("#revenue").text("Revenue:  " + addCommas(response.stats.revenue));
 
     // cash
-    $("#cash").text("Cash:  " + response.stats.cash);
+    $("#cash").text("Cash:  " + addCommas(response.stats.cash));
 
 
     // debt
-    $("#debt").text("Debt:  " + response.stats.debt);
+    $("#debt").text("Debt:  " + addCommas(response.stats.debt));
 
     // Gross Profit
-    $("#grossProfit").text("Gross Profit:  " + response.stats.grossProfit);
+    $("#grossProfit").text("Gross Profit:  " + addCommas(response.stats.grossProfit));
 
     // Return on Assets
     $("#roa").text("Return on Assets:  " + response.stats.returnOnAssets);
@@ -286,7 +298,13 @@ function addNews(response) {
     }
 }
 
+function addCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
+function rounding(number) {
+    return Math.round(number * 100) / 100;
+}
 
 
 
@@ -305,15 +323,17 @@ function grabURL() {
         // clears articles from previous company
         $("#articles").html("");
 
-        var ticker = searchTerm;
-        var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
-        var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
-        
-
-
+ var ticker = searchTerm;
+       var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
+ var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
+      
+      
         $.ajax({
             url: finURL,
             method: "GET"
+           error: function() {
+            $("#error").text("Invalid ticker!")
+        }
         }).then(function (response) {
             companyData(response);
             peerNewsData(response);
