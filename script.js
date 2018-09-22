@@ -47,6 +47,16 @@
 //     console.log(searchTerm);
 // });
 
+var config = {
+    apiKey: "AIzaSyB9TxxGUuGiUSxmRqS5e33OLIvB7zkH-sM",
+    authDomain: "finance-app-a3ffe.firebaseapp.com",
+    databaseURL: "https://finance-app-a3ffe.firebaseio.com",
+    projectId: "finance-app-a3ffe",
+    storageBucket: "finance-app-a3ffe.appspot.com",
+    messagingSenderId: "232411442269"
+  };
+  firebase.initializeApp(config);
+
 
 // Company information
 function companyData(response) {
@@ -196,7 +206,7 @@ function financials(response) {
 
             // Current Assets
             "Current Assets: " + response.financials.financials[i].currentAssets + "<br>" +
-            
+
             // Current Cash
             "Current Cash: " + response.financials.financials[i].currentCash + "<br>" +
 
@@ -323,17 +333,17 @@ function grabURL() {
         // clears articles from previous company
         $("#articles").html("");
 
- var ticker = searchTerm;
-       var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
- var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
-      
-      
+        var ticker = searchTerm;
+        var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
+        var chartURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
+
+
         $.ajax({
             url: finURL,
-            method: "GET"
-           error: function() {
-            $("#error").text("Invalid ticker!")
-        }
+            method: "GET",
+            error: function () {
+                $("#error").text("Invalid ticker!")
+            }
         }).then(function (response) {
             companyData(response);
             peerNewsData(response);
@@ -353,13 +363,13 @@ function grabURL() {
                 addNews(response);
             });
 
-                $.ajax({
-                    url: chartURL,
-                    method: "GET"
-                }).then(function (response) {
-                    console.log(response);
-                    
-    
+            $.ajax({
+                url: chartURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+
+
             });
         });
     });
