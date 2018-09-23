@@ -11,11 +11,11 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Group Project 1</title>
+    <title>Finance App</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse"> 
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -71,11 +71,14 @@
                         </ul>
                     </li>
                 </ul>
+
+
+              
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button id ="submit" type="submit" class="btn btn-default">Submit</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -110,13 +113,15 @@
 
     <div class="container">
 
+
+          <!-- Company information on  the leftside -->
         <div class="split left">
             <h1 id="company">Company Information</h1>
 
             <div class="panel panel-default" id="firstpanel">
                 <!--Add logo ? -->
                 <div class="panel-heading">
-                    <h3 class="panel-title">Company Name</h3>
+                    <h3 class="panel-title" id="name">Company Name</h3>
                 </div>
                 <div class="panel-body">
                     Company Description
@@ -250,8 +255,143 @@
             </table>
         </div>
     </div>
+    <form>
+            <input type="text" id="search">
+            <button id="submit">Test</button>
+            <button id="addToList">Add to Watchlist</button>
+            <div id="error"></div>
+        </form>
+    
+ 
+    
+        <!-- Company Information -->
+        <section id="companyData">
+    
+            <!-- Company Details -->
+            
+            <!-- company name -->
+            <div id="name"></div>
+    
+            <!-- company logo -->
+            <div id="logo"></div>
+    
+            <div id="compData">
+                <!-- exchange and ticker -->
+                <div id="xticker"></div>
+    
+                <!-- Price and Percent/Price change -->
+                <div id="price"></div>
+                <div id="priceChange"></div>
+                <div id="percentChange"></div>
+    
+                <!-- sector -->
+                <div id="sector"></div>
+    
+                <!-- CEO -->
+                <div id="ceo"></div>
+            </div>
+    
+            <!-- Peers -->
+            <div id="peers"></div>
+    
+            <!-- News -->
+            <div id="news">
+                <ul id="articles"></ul>
+            </div>
+    
+            <!--  -->
+    
+            
+        </section>
+    <br>
+    
+    <!-- Financial Information -->
+    <section id="finRatios">
+    
+    <!-- Financial Ratios -->
+    <div id="finacialRatios">
+        <!-- 52 WeekHigh and Low -->
+        <div id="hl">
+                <div id="high"></div>
+                <div id="low"></div>
+        </div>
+    
+        <!-- PE Ratio -->
+        <div id="pe"></div>
+    
+        <!-- Market Cap -->
+        <div id="marketCap"></div>
+    
+        <!-- DIV rate -->
+        <div id="divRate"></div>
+    
+        <!-- DIV Yield -->
+        <div id="divYield"></div>
+    
+        <!-- EPS -->
+        <div id="eps"></div>
+    
+        <!-- Beta -->
+        <div id="beta"></div>
+    
+        <!-- Short Ratio -->
+      
+        <div id="shortRatio"></div> 
+        
+        <!-- Price To Sales -->
+        <div id="priceToSales"></div>
+    
+        <!-- Price To Book -->
+        <div id="priceToBook"></div>
+    
+    </div>
+        <br>
+    
+    <!-- Financials -->
+    <div id="finacials">
+    
+        
+        <!-- Report Date Q1 -->
+        <div id="quarterData"></div>
+       
+    
+        <!-- revenue -->
+        <div id="revenue"></div>
+    
+        <!-- cash -->
+        <div id="cash"></div>
+        <!-- Debt -->
+        <div id="debt"></div>
+    
+        <!-- Gross Profit -->
+        <div id="grossProfit"></div>
+    
+        <!-- Return on Assets -->
+        <div id="roa"></div>
+    
+        <!-- Return on Equity -->
+        <div id="roe"></div>
+    
+        <!-- Profit Margin -->
+        <div id="profitMargin"></div>
+    
+    
+    
+        
+    
+    </div>
+    
+    
+    
+    
+        <br>
+    </section> 
 
-    <script src="assets/javascript/script.js"></script>
+    <script src="/Users/John/Desktop/financeApp/Jin/javascript/script2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script src="/Users/John/Desktop/financeApp/script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

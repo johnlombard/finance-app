@@ -1,21 +1,19 @@
 
-
-// Ideas:
-// Watchlist
-
+// TOD firebase not linking
+// Invalid ticker needs to disappear
 
 
+// var config = {
+//     apiKey: "AIzaSyB9TxxGUuGiUSxmRqS5e33OLIvB7zkH-sM",
+//     authDomain: "finance-app-a3ffe.firebaseapp.com",
+//     databaseURL: "https://finance-app-a3ffe.firebaseio.com",
+//     projectId: "finance-app-a3ffe",
+//     storageBucket: "finance-app-a3ffe.appspot.com",
+//     messagingSenderId: "232411442269"
+//   };
+//   firebase.initializeApp(config);
 
-var config = {
-    apiKey: "AIzaSyB9TxxGUuGiUSxmRqS5e33OLIvB7zkH-sM",
-    authDomain: "finance-app-a3ffe.firebaseapp.com",
-    databaseURL: "https://finance-app-a3ffe.firebaseio.com",
-    projectId: "finance-app-a3ffe",
-    storageBucket: "finance-app-a3ffe.appspot.com",
-    messagingSenderId: "232411442269"
-  };
-  firebase.initializeApp(config);
-
+//   var dataRef = firebase.database();
 
 // Company information
 function companyData(response) {
