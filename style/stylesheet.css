@@ -39,5 +39,9 @@ path {
     fill: none;
     pointer-events: all;
 }
+
+.focus {
+    color: white;
+}
            
       

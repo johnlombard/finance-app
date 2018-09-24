@@ -35,7 +35,7 @@ html, body {
 
 
 #company {
-    font-size: 4rem; 
+    font-size: 3rem; 
     color: #fff;
     position: relative;
     left: 70%;
@@ -43,7 +43,7 @@ html, body {
     white-space: nowrap;
 }
 #Financial {
-  font-size: 4rem; 
+  font-size: 3rem; 
   color: #fff;
   position: relative;
   left: 90%;

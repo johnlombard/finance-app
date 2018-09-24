@@ -72,9 +72,8 @@ function addLogo(response) {
     logoImage = $("<img>");
     logoImage.attr("src", response.logo.url);
     logoImage.attr("width", 50);
+    $("#logo").html("");
     $("#logo").html(logoImage);
-
-
 
 };
 
@@ -127,7 +126,7 @@ function finRatios(response) {
 
     // Short Ratio
     $("#shortRatio").text("Short Ratio:  " + response.stats.shortRatio);
-    
+
     // pricetosales
     $("#priceToSales").text("Price to Sales:  " + rounding(response.stats.priceToSales));
 
@@ -253,11 +252,11 @@ function addNews(response) {
         var articleContainer = $("<li>");
         var newArticle = $("<a>");
         newArticle.attr("href", response.articles[i].url);
-        newImage = $("<img>");
-        newImage.attr("src", response.articles[i].urlToImage);
-        newImage.attr("width", 50);
+        // newImage = $("<img>");
+        // newImage.attr("src", response.articles[i].urlToImage);
+        // newImage.attr("width", 50);
         newArticle.text(response.articles[i].title);
-        newArticle.append(newImage);
+        // newArticle.append(newImage);
         articleContainer.append(newArticle);
         $("#articles").append(articleContainer);
     }
@@ -303,12 +302,12 @@ function viewButton(ticker) {
         url: finURL,
         method: "GET",
         error: function () {
-            $("#error").text("Invalid ticker!")
+            $("#error").html("Invalid ticker!")
         }
     }).then(function (response) {
         companyData(response);
         peerNewsData(response);
-        $("#error").remove(":contains('Invalid ticker')");
+        $("#error").children().remove(":contains('Invalid ticker')");
 
 
         // function chartData(response) {
@@ -546,7 +545,8 @@ $(document).ready(function () {
                                 .attr("class", "overlay")
                                 .attr("width", width)
                                 .attr("height", height)
-                                .on("mouseover", function () { focus.style("display", null); })
+                                .on("mouseover", function () { focus.style("display", null, );
+                                 })
                                 .on("mouseout", function () { focus.style("display", "none"); })
                                 .on("mousemove", mousemove);
                             function mousemove() {
