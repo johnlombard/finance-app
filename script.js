@@ -25,7 +25,7 @@ function companyData(response) {
 
 
     // add company name
-    $("#name").text( response.quote.companyName);
+    $("#name").text(response.quote.companyName);
 
     // add ticker and exchange
     $("#exchange").text("Exchange: " + response.quote.primaryExchange);
@@ -39,7 +39,7 @@ function companyData(response) {
     // Peers
     // for (i = 0; i <= response.peers; i++ ){
     //     console.log(response.peers[i])    };
-    
+
     // console.log(response.peers)
 
 
@@ -74,12 +74,13 @@ function addLogo(response) {
     logoImage.attr("width", 50);
     $("#logo").html(logoImage);
 
-    
-    
+
+
 };
 
-function removeIvalidTicker (){
+function removeIvalidTicker() {
     $("#error").remove(":contains('Invalid ticker')");
+    // $(".panel").remove(":contains('Invalid ticker')");
 }
 
 
@@ -87,6 +88,7 @@ function removeIvalidTicker (){
 function peerNewsData(response) {
     //add company details
     $("#sector").text("Sector: " + response.quote.sector);
+
 
     // add headlines TODO
 
@@ -98,7 +100,6 @@ function peerNewsData(response) {
 
 function finRatios(response) {
     //52 Week High
-
     $("#high").text("52 Week High:  " + rounding(response.quote.week52High));
 
 
@@ -122,19 +123,25 @@ function finRatios(response) {
     $("#beta").text("Beta:  " + rounding(response.stats.beta));
 
     //market Cap
-    // CHANGE FORMAT
     $("#marketCap").text("Market Capitlization:  " + addCommas(response.stats.marketcap));
-
 
     // Short Ratio
     $("#shortRatio").text("Short Ratio:  " + response.stats.shortRatio);
-
-
+    
     // pricetosales
     $("#priceToSales").text("Price to Sales:  " + rounding(response.stats.priceToSales));
 
     // pricetobook
     $("#priceToBook").text("Price to Book:  " + response.stats.priceToBook);
+
+    // Return on Assets
+    $("#roa").text("Return on Assets:  " + response.stats.returnOnAssets);
+
+    // Return on Capital
+    $("#roe").text("Return on Equity:  " + response.stats.returnOnEquity);
+
+    // ProfitMargin
+    $("#profitMargin").text("Profit Margin:  " + response.stats.profitMargin).html("<br>");
 
 };
 
@@ -142,6 +149,17 @@ function finRatios(response) {
 // adding the financials
 function financials(response) {
 
+    $("#revenue").text("Revenue:  " + addCommas(response.stats.revenue));
+
+    // cash
+    $("#cash").text("Cash:  " + addCommas(response.stats.cash));
+
+
+    // debt
+    $("#debt").text("Debt:  " + addCommas(response.stats.debt));
+
+    // Gross Profit
+    $("#grossProfit").text("Gross Profit:  " + addCommas(response.stats.grossProfit));
 
     for (i = 0; i <= 3; i++) {
 
@@ -149,10 +167,13 @@ function financials(response) {
         $("#quarterData").append(
 
             // Quarter Data Change Format
-            response.financials.financials[i].reportDate + "<br>" +
+            "<div id=" + response.financials.financials[i].reportDate + " >" + "<br>" + "<h5>" +
+            response.financials.financials[i].reportDate + "</h5>" +
 
             // IS
-            // Revenue header needed
+            "<h5>Income Statement</h5>" + "<br>" +
+
+
 
             // Total Revenue
             "Total Revenue: " + addCommas(response.financials.financials[i].totalRevenue) + "<br>" +
@@ -178,13 +199,13 @@ function financials(response) {
             + "Operating Revenue: " + addCommas(response.financials.financials[i].operatingRevenue) + "<br>" +
             "Operating Gains/Losses: " + response.financials.financials[i].operatingGainsLosses + "<br>" +
 
-            // Balance Sheet Header This
-            // Assets BOLD
+            // Net Income
+            "Net Income: " + addCommas(response.financials.financials[i].netIncome) + "</div>" + "<br>" +
+
+            // Balance Sheet
+            "<h5>Balance Sheet</h5>" + "<br>" +
 
             // Current Assets
-
-
-
             "Current Assets: " + addCommas(response.financials.financials[i].currentAssets) + "<br>" +
 
 
@@ -209,64 +230,15 @@ function financials(response) {
             "Total Liabilities : " + response.financials.financials[i].totalLiabilities + "<br>" +
 
             // Shareholder Equity TODO Bold
-            "Shareholder Equity: " + addCommas(response.financials.financials[i].shareholderEquity) + "<br>" +
+            "Shareholder Equity: " + addCommas(response.financials.financials[i].shareholderEquity) + "<br>"
             // TODO NEED NET OUTSTANDING ASSETS???
-
-
-
-
-
-            // currentAssets	number
-            // currentCash	number
-            // totalCash	number
-            // totalAssets	number
-
-            // currentDebt	number
-            // totalDebt	number
-            // totalLiabilities	number
-
-            // shareholderEquity	number
-
-
-            // This maybe it 
-
-
-            // Net Income Bold This
-            // Net Income
-            "Net Income: " + addCommas(response.financials.financials[i].netIncome) + "<br>"
-
-
-
-
 
         );
     };
 
-    // revenue
-
-    // TODO Change format
-    $("#revenue").text("Revenue:  " + addCommas(response.stats.revenue));
-
-    // cash
-    $("#cash").text("Cash:  " + addCommas(response.stats.cash));
 
 
-    // debt
-    $("#debt").text("Debt:  " + addCommas(response.stats.debt));
 
-    // Gross Profit
-    $("#grossProfit").text("Gross Profit:  " + addCommas(response.stats.grossProfit));
-
-    // Return on Assets
-    $("#roa").text("Return on Assets:  " + response.stats.returnOnAssets);
-
-    // Return on Capital
-    $("#roe").text("Return on Equity:  " + response.stats.returnOnEquity);
-
-
-    // ProfitMargin
-    $("#profitMargin").text("Profit Margin:  " + response.stats.profitMargin);
-    
 
 };
 
@@ -307,14 +279,14 @@ dataRef.ref().on("child_added", function (childSnapshot) {
         " </td><td> " + childSnapshot.val().percentChange +
         " </td><td> " + childSnapshot.val().exchange +
         " </td><td> " + childSnapshot.val().sector +
-        " </td>" + 
+        " </td>" +
         "<td><button class='viewButton' onclick='viewButton(" + '"' + childSnapshot.val().ticker + '"' + ")'>View</button></td>" +
         "</tr> ");
 }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
 });
 
-function viewButton (ticker) {
+function viewButton(ticker) {
 
     var searchTerm = ticker;
     console.log(searchTerm);
@@ -339,12 +311,12 @@ function viewButton (ticker) {
         $("#error").remove(":contains('Invalid ticker')");
 
 
-function chartData(response) {
-    for (i = 0; i <= response.length; i++) {
+        // function chartData(response) {
+        //     for (i = 0; i <= response.length; i++) {
 
-        console.log("Close Price" + response[i].close)
-    };
-};
+        //         console.log("Close Price" + response[i].close)
+        //     };
+        // };
 
 
         finRatios(response);
@@ -386,7 +358,7 @@ $(document).ready(function () {
 
         // clears articles from previous company
         $("#articles").html("");
-        $("svg").empty();
+        $("svg").remove();
 
         var ticker = searchTerm;
         var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
@@ -401,7 +373,7 @@ $(document).ready(function () {
         }).then(function (response) {
             companyData(response);
             peerNewsData(response);
-            removeIvalidTicker ()
+            removeIvalidTicker()
             finRatios(response);
             financials(response);
             addLogo(response);
@@ -423,12 +395,12 @@ $(document).ready(function () {
             }).then(function (response) {
                 console.log(response);
 
-               
+
 
                 // sets dimensions of canvas/graph
                 var margin = { top: 30, right: 20, bottom: 30, left: 50 },
-                    width = 600 - margin.left - margin.right,
-                    height = 270 - margin.top - margin.bottom;
+                    width = 700 - margin.left - margin.right,
+                    height = 300 - margin.top - margin.bottom;
 
                 // Parse the date / time
                 var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -462,15 +434,15 @@ $(document).ready(function () {
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
-                    $ .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
+                $.attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
 
-                       
+
                 // Get the minumum Value from the array to add space at the bottom of the graph
                 Array.min = function (array) {
                     return Math.min.apply(Math, array);
 
-                    
+
                 };
                 var url = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
                 // Get the data
@@ -586,63 +558,37 @@ $(document).ready(function () {
                                 focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
                                 focus.select(".x-hover-line").attr("y2", height - y(d.close));
                                 focus.select(".y-hover-line").attr("x2", width + width);
+                                focus.select("text").text(formatCurrency(d.close));
                             }
                         });
                     }
                 });
 
-                chartData(response);
+                //     chartData(response);
 
 
+                // });
             });
         });
+
+
+
+        $("#addToList").on("click", function (event) {
+            event.preventDefault();
+            if ($("#name").text() !== "") {
+                dataRef.ref().push({
+
+                    companyName: $("#name").text(),
+                    price: $("#price").text(),
+                    percentChange: $("#percentChange").text(),
+                    exchange: $("#exchange").text(),
+                    sector: $("#sector").text(),
+                    ticker: $("#ticker").text()
+                });
+            };
+        });
     });
-
-
-
-    $("#addToList").on("click", function (event) {
-        event.preventDefault();
-        if ($("#name").text() !== "") {
-            dataRef.ref().push({
-
-                companyName: $("#name").text(),
-                price: $("#price").text(),
-                percentChange: $("#percentChange").text(),
-                exchange: $("#exchange").text(),
-                sector: $("#sector").text(),
-                ticker: $("#ticker").text()
-            });
-        };
-    });
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
-
-
-
-
-
-
-
-
-
 
 // John's notes for financials
 // IS
@@ -655,15 +601,7 @@ $(document).ready(function () {
         // researchAndDevelopment	number
         // operatingExpense	number
         // operatingIncome	number
-// operatingGainsLosses ***HereOR
-
-
-
-
-
-
-
-
+// operatingGainsLosses ***Here
 // currentAssets	number
 // currentCash	number
 // totalCash	number

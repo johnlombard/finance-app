@@ -27,34 +27,20 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <!-- <a class="navbar-brand" id="addToList">Add to Watchlist</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
+       
+                    <button class="btn btn-dark my-2 my-sm-0" type="submit" id="addToList">Add to Watchlist</button>
+
+               
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="addToList">Add to Watchlist</a>
+                    <a class="nav-link" id="addToList"></a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -135,8 +121,7 @@
                     <h3 class="panel-title" id="price">Price</h3>
                 </div>
                 <div class="panel-body">
-                    <!-- REMOVE THIS -->
-                    Price Change ($/%)
+                    
 
                     <!-- Price and Percent/Price change -->
                     <div id="priceChange"></div>
@@ -147,7 +132,7 @@
 
             <div class="panel panel-default" id="fourthpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">News</h3>
+                    <h3 class="panel-title">News (Click on a headline)</h3>
                 </div>
 
 
@@ -220,13 +205,22 @@
 
                         <!-- Price To Book -->
                         <div id="priceToBook"></div>
+
+                         <!-- Return on Assets -->
+                         <div id="roa"></div>
+                    
+                        <!-- Return on Equity -->
+                        <div id="roe"></div>
+
+                        <!-- ProfitMargin -->
+                        <div id="profitMargin"></div>
                     </div>
                 </div>
             </div>
 
             <div class="panel panel-default" id="secondpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Past Four Quarters</h3>
+                    <h3 class="panel-title">Financials Past Four Quarters</h3>
                 </div>
                 <div class="panel-body">
                     <!-- Report Q data -->
@@ -234,29 +228,6 @@
                 </div>
             </div>
 
-            <div class="panel panel-default" id="thirdpanel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Gross Profit</h3>
-                </div>
-                <div class="panel-body">
-
-                </div>
-            </div>
-
-            <div class="panel panel-default" id="fourthpanel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Profit Margin</h3>
-                </div>
-                <div class="panel-body">
-
-                </div>
-            </div>
-
-            <!-- Include Kaitlyn's graph -->
-            <div class="chart-container">
-
-                <svg></svg>
-            </div>
             <br>
         </div>
     </div>
