@@ -1,4 +1,5 @@
-
+// Replace images has bugs
+// Invalid ticker stays on the page
 
 // Ideas:
 // Watchlist
@@ -24,14 +25,23 @@ function companyData(response) {
 
 
     // add company name
-    $("#name").text("Company Name: " + response.quote.companyName);
+    $("#name").text( response.quote.companyName);
 
     // add ticker and exchange
-    $("#exchange").text(response.quote.primaryExchange);
-    $("#ticker").text(response.quote.symbol);
+    $("#exchange").text("Exchange: " + response.quote.primaryExchange);
+    $("#ticker").text("Ticker: " + response.quote.symbol);
+
+    $("#ceo").text("CEO: " + response.company.CEO);
 
     //price
     $("#price").text("Price:  " + response.quote.latestPrice);
+
+    // Peers
+    // for (i = 0; i <= response.peers; i++ ){
+    //     console.log(response.peers[i])    };
+    
+    // console.log(response.peers)
+
 
     //amount change
     $("#priceChange").text("Price Change:  " + response.quote.change);
@@ -64,8 +74,13 @@ function addLogo(response) {
     logoImage.attr("width", 50);
     $("#logo").html(logoImage);
 
+    
+    
 };
 
+function removeIvalidTicker (){
+    $("#error").remove(":contains('Invalid ticker')");
+}
 
 
 // Peer and News information
@@ -251,6 +266,7 @@ function financials(response) {
 
     // ProfitMargin
     $("#profitMargin").text("Profit Margin:  " + response.stats.profitMargin);
+    
 
 };
 
@@ -261,7 +277,7 @@ function financials(response) {
 
 // NEED TO RESET THIS WHEN SEARCHING FOR NEW COMPANY
 function addNews(response) {
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 7; i++) {
         var articleContainer = $("<li>");
         var newArticle = $("<a>");
         newArticle.attr("href", response.articles[i].url);
@@ -320,13 +336,14 @@ function viewButton (ticker) {
     }).then(function (response) {
         companyData(response);
         peerNewsData(response);
+        $("#error").remove(":contains('Invalid ticker')");
 
 
 function chartData(response) {
     for (i = 0; i <= response.length; i++) {
 
         console.log("Close Price" + response[i].close)
-    }
+    };
 };
 
 
@@ -384,7 +401,7 @@ $(document).ready(function () {
         }).then(function (response) {
             companyData(response);
             peerNewsData(response);
-
+            removeIvalidTicker ()
             finRatios(response);
             financials(response);
             addLogo(response);
@@ -406,7 +423,7 @@ $(document).ready(function () {
             }).then(function (response) {
                 console.log(response);
 
-                // $("#gifs-station").empty(); 
+               
 
                 // sets dimensions of canvas/graph
                 var margin = { top: 30, right: 20, bottom: 30, left: 50 },
@@ -440,17 +457,20 @@ $(document).ready(function () {
                     .y(function (d) { return y(d.close); });
 
                 // Adds the svg canvas
-                var svg = d3.select("body")
+                var svg = d3.select("#thirdpanel")
                     .append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
-                    .attr("transform",
+                    $ .attr("transform",
                         "translate(" + margin.left + "," + margin.top + ")");
 
+                       
                 // Get the minumum Value from the array to add space at the bottom of the graph
                 Array.min = function (array) {
                     return Math.min.apply(Math, array);
+
+                    
                 };
                 var url = "https://api.iextrading.com/1.0/stock/" + ticker + "/chart/5y";
                 // Get the data
