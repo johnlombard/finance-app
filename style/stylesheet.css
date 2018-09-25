@@ -3,7 +3,8 @@
     font-family: 'Open Sans', sans-serif;
 }
 #error {
-    color: red;
+    color: white;
+    font-size: 18px;
 }
 
 .chart div {
@@ -20,6 +21,7 @@ svg {
         
     font: 8px;
     font-family: 'Open Sans', sans-serif;
+ 
 }
 
 path {
@@ -37,6 +39,10 @@ path {
 .overlay {
     fill: none;
     pointer-events: all;
+    color: white;
 }
-           
+
+
+    
+    
       

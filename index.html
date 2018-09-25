@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Finance App</title>
 
+    <!-- linking style sheets -->
     <link rel="stylesheet" href="style/reset.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="style/stylesheet.css">
-     <!-- load the d3.js library, store sizing for line chart (svg) -->	
-    <svg></svg> 
+
+    <!-- load the d3.js library, store sizing for line chart (svg) -->
+
     <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <!-- ADD GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+    <!-- TO link JIn's style sheet -->
+    <link rel="stylesheet" href="Jin/css/style.css">
 </head>
+
 <body>
-        <!-- Firebase Watchlist -->
-<table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <nav class="navbar navbar-expand-lg  ">
+        <!-- <a class="navbar-brand" id="addToList">Add to Watchlist</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+       
+                    <button class="btn btn-dark my-2 my-sm-0" type="submit" id="addToList">Add to Watchlist</button>
+
+               
+                <li class="nav-item">
+                    <a class="nav-link" id="addToList"></a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                   <div id="error"></div>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn  btn-dark my-2 my-sm-0" type="submit" id="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- Firebase Watchlist -->
+    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead>
             <!-- TODO CHANGE THIS TO ACROSS THE WHOLE TABLE -->
-            <tr><th>User Watchlist</th></tr>
+            <tr>
+                <th>User Watchlist</th>
+            </tr>
             <tr>
                 <th class="th-sm">Company Name
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
@@ -43,147 +79,171 @@
         <tbody class="newstocks" id="watchlist">
         </tbody>
     </table>
-    <form>
-        <input type="text" id="search">
-        <!-- Maybe make this a drop down with five most popular tickers -->
-        <button id="submit">Test</button>
-        <button id="addToList">Add to Watchlist</button>
-        <div id="error"></div>
-    </form>
+    
 
-<main>
 
-    <!-- Company Information -->
-    <section id="companyData">
+    <div class="container" >
 
-        <!-- Company Details -->
-        
-        <!-- company name -->
-        <div id="name"></div>
+        <div class="split left" >
+            <h2 id="company">Company Information</h2>
 
-        <!-- company logo -->
-        <div id="logo"></div>
+            <div class="panel panel-default" id="firstpanel">
 
-        <div id="compData">
-            <!-- exchange and ticker -->
-            <div id="exchange"></div>
-            <div id="ticker"></div>
+                <!-- Company Name -->
+                <div class="panel-heading">
 
-            <!-- Price and Percent/Price change -->
-            <div id="price"></div>
-            <div id="priceChange"></div>
-            <div id="percentChange"></div>
+                    <!-- TODO REMOVE NAME -->
+                    <h3 class="panel-title" id="name">Company Name</h3>
+                    <div id="name"></div>
+                    <!-- company logo -->
+                    <div id="logo"></div>
+                </div>
 
-            <!-- sector -->
-            <div id="sector"></div>
 
-            <!-- CEO -->
-            <div id="ceo"></div>
+                <!-- Body of the pannel -->
+                <div class="panel-body">
+
+                    <!-- Ticker -->
+                    <div id="ticker"></div>
+
+                    <!-- Exchange -->
+                    <div id="exchange"></div>
+
+                    <!-- Ceo -->
+                    <div id="ceo"></div>
+                    
+                </div>
+            </div>
+
+
+            <!-- Price Information -->
+            <div class="panel panel-default" id="thirdpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="price">Price</h3>
+                </div>
+                <div class="panel-body">
+                    
+
+                    <!-- Price and Percent/Price change -->
+                    <div id="priceChange"></div>
+                    <div id="percentChange"></div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="fourthpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">News (Click on a headline)</h3>
+                </div>
+
+
+                <div class="panel-body">
+
+
+                    <!-- News -->
+                    <div id="news">
+                        <ul id="articles"></ul>
+                    </div>
+
+                  
+                    
+
+
+                </div>
+            </div>
         </div>
 
-        <!-- Peers -->
-        <div id="peers"></div>
 
-        <!-- News -->
-        <div id="news">
-            <ul id="articles"></ul>
+
+
+
+
+
+
+
+
+        <!-- Finacials Right side of the screen -->
+        <div class="split right" >
+            <h2 id="Financial">Financial Information</h2>
+
+            <div class="panel panel-default" id="firstpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ratios</h3>
+                </div>
+
+                <div class="panel-body">
+                    <!-- Financial Ratios -->
+                    <div id="finacialRatios">
+                        <!-- 52 WeekHigh and Low -->
+                        <div id="hl">
+                            <div id="high"></div>
+                            <div id="low"></div>
+                        </div>
+                        <!-- PE Ratio -->
+                        <div id="pe"></div>
+
+                        <!-- Market Cap -->
+                        <div id="marketCap"></div>
+
+                        <!-- DIV rate -->
+                        <div id="divRate"></div>
+
+                        <!-- DIV Yield -->
+                        <div id="divYield"></div>
+
+                        <!-- EPS -->
+                        <div id="eps"></div>
+
+                        <!-- Beta -->
+                        <div id="beta"></div>
+
+                        <!-- Short Ratio -->
+                        <div id="shortRatio"></div>
+
+                        <!-- Price To Sales -->
+                        <div id="priceToSales"></div>
+
+                        <!-- Price To Book -->
+                        <div id="priceToBook"></div>
+
+                         <!-- Return on Assets -->
+                         <div id="roa"></div>
+                    
+                        <!-- Return on Equity -->
+                        <div id="roe"></div>
+
+                        <!-- ProfitMargin -->
+                        <div id="profitMargin"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="secondpanel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Financials Past Four Quarters</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- Report Q data -->
+                    <div id="quarterData"></div>
+                </div>
+            </div>
+
+            <br>
         </div>
-
-        <!--  -->
-
-        
-    </section>
-<br>
-
-<!-- Financial Information -->
-<section id="finRatios">
-
-<!-- Financial Ratios -->
-<div id="finacialRatios">
-    <!-- 52 WeekHigh and Low -->
-    <div id="hl">
-            <div id="high"></div>
-            <div id="low"></div>
+    </div>
     </div>
 
-    <!-- PE Ratio -->
-    <div id="pe"></div>
-
-    <!-- Market Cap -->
-    <div id="marketCap"></div>
-
-    <!-- DIV rate -->
-    <div id="divRate"></div>
-
-    <!-- DIV Yield -->
-    <div id="divYield"></div>
-
-    <!-- EPS -->
-    <div id="eps"></div>
-
-    <!-- Beta -->
-    <div id="beta"></div>
-
-    <!-- Short Ratio -->
-  
-    <div id="shortRatio"></div> 
-    
-    <!-- Price To Sales -->
-    <div id="priceToSales"></div>
-
-    <!-- Price To Book -->
-    <div id="priceToBook"></div>
-
-</div>
-    <br>
-
-<!-- Financials -->
-<div id="finacials">
-
-    
-    <!-- Report Date Q1 -->
-    <div id="quarterData"></div>
-   
-
-    <!-- revenue -->
-    <div id="revenue"></div>
-
-    <!-- cash -->
-    <div id="cash"></div>
-    <!-- Debt -->
-    <div id="debt"></div>
-
-    <!-- Gross Profit -->
-    <div id="grossProfit"></div>
-
-    <!-- Return on Assets -->
-    <div id="roa"></div>
-
-    <!-- Return on Equity -->
-    <div id="roe"></div>
-
-    <!-- Profit Margin -->
-    <div id="profitMargin"></div>
 
 
 
-    
-
-</div>
+          
 
 
-
-<!-- div to store chart -->
-<div class="chart-container"></div>
-
-<br>
-
-</section>   
-
-
-</main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
     <script src="script.js"></script>
+    <script src="Jin/javascript/script2.js"></script>
+    
 </body>
+
 </html>

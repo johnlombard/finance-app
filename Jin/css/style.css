@@ -1,7 +1,21 @@
+
+div.split.right::-webkit-scrollbar {
+  width: 12px;
+}
+
+div.split.right::-webkit-scrollbar-track {
+box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+
+div.split.right::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+ box-shadow: inset 0 0 6px rgba(0,0,0,0.5);}
+
 :root {
     --container-bg-color: #333;
     --left-bg-color: rgba(223, 39, 39, 0.7);
-    --left-button-hover-color: rgba(161, 11, 11, 0.3);
+    --left-button-hover-color: rgba(69, 167, , 0.3);
     --right-bg-color: rgba(43, 43, 43, 0.8);
     --right-button-hover-color: rgba(92, 92, 92, 0.3);
     --hover-width: 75%;
@@ -18,8 +32,21 @@ html, body {
     overflow-x: hidden;
 }
 
+
+.navbar {
+
+  background-color: black;
+  transition: var(--speed) all ease-in-out;
+}
+
+  .navbar-expand-lg {
+    background-color: black;
+    transition: var(--speed) all ease-in-out;
+
+  }
+
 #company {
-    font-size: 4rem; 
+    font-size: 3rem; 
     color: #fff;
     position: relative;
     left: 70%;
@@ -27,7 +54,7 @@ html, body {
     white-space: nowrap;
 }
 #Financial {
-  font-size: 4rem; 
+  font-size: 3rem; 
   color: #fff;
   position: relative;
   left: 90%;
@@ -47,24 +74,32 @@ html, body {
 }
 
 .container {
-  position: relative;
+  /* position: relative;
   width: 100%;
   height: 77%;
-  background: var(--container-bg-color);
+  background: var(--container-bg-color); */
+  overflow: scroll;
 }
 
 .split {
   position: absolute;
   width: 50%;
-  height: 100%;
-  overflow: hidden;
+  height: 80%;
+  overflow: scroll;
+  color: #fff;
 }
 
 .split.left {
   left:0;
-  background: url('https://image.ibb.co/m56Czw/designer.jpg') center center no-repeat;
+  background-color:black;
+  /* background: url('https://image.ibb.co/m56Czw/designer.jpg') center center no-repeat; */
   background-size: cover;
   z-index: 1;
+}
+
+
+.panel-default {
+  margin-left: 15px;
 }
 
 #firstpanel {
@@ -88,13 +123,14 @@ html, body {
   position:absolute;
   content: "";
   width: 100%;
-  height: 100%;
+  
   background: var(--left-bg-color);
 }
 
 .split.right {
   right:0;
-  background: url('https://image.ibb.co/m3ZbRb/programmer.png') center center no-repeat;
+  background-color: black;
+  /* background: url('https://image.ibb.co/m3ZbRb/programmer.png') center center no-repeat; */
   background-size: cover;
 }
 
@@ -103,7 +139,9 @@ html, body {
   content: "";
   width: 100%;
   height: 100%;
-  background: var(--right-bg-color);
+  /* background: var(--right-bg-color); */
+
+  
 }
 
 .split.left, .split.right, .split.right:before, .split.left:before {
@@ -156,4 +194,8 @@ html, body {
 .top-static {
     width:20%;
     margin-left: auto;
+}
+
+a {
+  color:white;
 }
