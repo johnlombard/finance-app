@@ -3,7 +3,8 @@
     font-family: 'Open Sans', sans-serif;
 }
 #error {
-    color: red;
+    color: white;
+    font-size: 18px;
 }
 
 .chart div {
@@ -38,10 +39,10 @@ path {
 .overlay {
     fill: none;
     pointer-events: all;
-}
-
-.focus {
     color: white;
 }
-           
+
+
+    
+    
       

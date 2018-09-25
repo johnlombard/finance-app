@@ -33,6 +33,17 @@ html, body {
 }
 
 
+.navbar {
+
+  background-color: black;
+  transition: var(--speed) all ease-in-out;
+}
+
+  .navbar-expand-lg {
+    background-color: black;
+    transition: var(--speed) all ease-in-out;
+
+  }
 
 #company {
     font-size: 3rem; 
@@ -80,7 +91,7 @@ html, body {
 
 .split.left {
   left:0;
-  background-color: rgba(69, 167, 72);
+  background-color:black;
   /* background: url('https://image.ibb.co/m56Czw/designer.jpg') center center no-repeat; */
   background-size: cover;
   z-index: 1;

@@ -37,29 +37,33 @@ function companyData(response) {
     $("#price").text("Price:  " + response.quote.latestPrice);
 
     // Peers
-    // for (i = 0; i <= response.peers; i++ ){
-    //     console.log(response.peers[i])    };
-
-    // console.log(response.peers)
+    $("#peers").text("Peers: " +response.peers);
+   
 
 
     //amount change
     $("#priceChange").text("Price Change:  " + response.quote.change);
     if (Math.sign(response.quote.change) === -1) {
-        $("#priceChange").css("color", "red");
+        $(".split.left").css("background-color", "red");
+        $(".navbar, navbar-expand-lg").css("background-color", "red");
+        
     }
     else {
-        $("#priceChange").css("color", "green");
-    }
+        $(".split.left").css("background-color", "green");
+        $(".navbar, navbar-expand-lg").css("background-color", "green");
+    } 
 
     //percent change 
     $("#percentChange").text("Percent Change:  " + rounding(response.quote.changePercent * 100) + "%");
     if (Math.sign(response.quote.changePercent) === -1) {
-        $("#percentChange").css("color", "red");
+        $("#percentChange").css("color", "white");
+
     }
     else {
-        $("#percentChange").css("color", "green");
+        $("#percentChange").css("color", "white");
     }
+
+    
 };
 
 // Add Logo
@@ -302,7 +306,7 @@ function viewButton(ticker) {
         url: finURL,
         method: "GET",
         error: function () {
-            $("#error").html("Invalid ticker!")
+            $("#error").html("Invalid ticker! Please Try Again.")
         }
     }).then(function (response) {
         companyData(response);
@@ -397,9 +401,9 @@ $(document).ready(function () {
 
 
                 // sets dimensions of canvas/graph
-                var margin = { top: 30, right: 20, bottom: 30, left: 50 },
+                var margin = { top: 100, right: 100, bottom: 50, left: 0 },
                     width = 700 - margin.left - margin.right,
-                    height = 300 - margin.top - margin.bottom;
+                    height = 350 - margin.top - margin.bottom;
 
                 // Parse the date / time
                 var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -475,9 +479,9 @@ $(document).ready(function () {
                                 lastPrice = arrayClose[arrayClose.length - 1];
                             });
                             if (firstPrice > lastPrice) {
-                                lineColor = "pink";
+                                lineColor = "white";
                             } else {
-                                lineColor = "plum";
+                                lineColor = "white";
                             }
                             // Scale the range of the data
                             x.domain(d3.extent(data, function (d) {
@@ -507,7 +511,8 @@ $(document).ready(function () {
                                 .attr("x", width / 2)               //Dynamically moves with the graph
                                 .attr("y", height + margin.bottom)
                                 .style("text-anchor", "middle")
-                                .text("Date");
+                                
+                                .text("Date").style("color", "white");
                             // Add the text label for the Y axis
                             svg.append("text")
                                 .attr("transform", "rotate(-90)")
@@ -515,7 +520,9 @@ $(document).ready(function () {
                                 .attr("y", 0 - margin.left)
                                 .attr("dy", "1em")
                                 .style("text-anchor", "middle")
+                                .style("color", "white")
                                 .text("Price");
+                                
                             // Adding the Title
                             svg.append("text")
                                 .attr("x", (width / 2))
@@ -523,6 +530,7 @@ $(document).ready(function () {
                                 .attr("text-anchor", "middle")
                                 .style("font-size", "16px")
                                 .style("text-decoration", "underline")
+                                .style("color", "white")
                                 .text("Price to Date");
                             //Mouseover
                             var focus = svg.append("g")
