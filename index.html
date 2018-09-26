@@ -22,7 +22,7 @@
 
 
     <!-- TO link JIn's style sheet -->
-    <link rel="stylesheet" href="Jin/css/style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
@@ -93,7 +93,9 @@
                 <div class="panel-heading">
 
                     <!-- TODO REMOVE NAME -->
-                    <h3 class="panel-title" id="name">Company Name</h3>
+                    <h3 class="panel-title" id="name">
+                        Enter a stock ticker to see company information
+                    </h3>
                     <div id="name"></div>
                     <!-- company logo -->
                     <div id="logo"></div>
@@ -119,7 +121,7 @@
             <!-- Price Information -->
             <div class="panel panel-default" id="thirdpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title" id="price">Price</h3>
+                    <h3 class="panel-title" id="price"></h3>
                 </div>
                 <div class="panel-body">
                     
@@ -133,7 +135,7 @@
 
             <div class="panel panel-default" id="fourthpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">News (Click on a headline)</h3>
+                    <h3 class="panel-title"></h3>
                 </div>
 
 
@@ -141,7 +143,8 @@
 
 
                     <!-- News -->
-                    <div id="news">
+                    <div>
+                        <ul id="news"></ul>
                         <ul id="articles"></ul>
                     </div>
 
@@ -168,7 +171,7 @@
 
             <div class="panel panel-default" id="firstpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Ratios</h3>
+                        <h3 class="panel-title" id="ratios">Enter a stock ticker to see financial information</h3>
                 </div>
 
                 <div class="panel-body">
@@ -220,10 +223,11 @@
 
             <div class="panel panel-default" id="secondpanel">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Financials Past Four Quarters</h3>
+                        <h3 class="panel-title"></h3>
                 </div>
                 <div class="panel-body">
                     <!-- Report Q data -->
+                    <div id ="qHeadlines"></div>
                     <div id="quarterData"></div>
                 </div>
             </div>
@@ -241,8 +245,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
-    <script src="script.js"></script>
-    <script src="Jin/javascript/script2.js"></script>
+    <script src="script/script.js"></script>
+    <script src="script/script2.js"></script>
     
 </body>
 
