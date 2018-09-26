@@ -1,7 +1,8 @@
 #companyData {
     background-color:lightgrey;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Century Gothic","Apple Gothic",AppleGothic,"URW Gothic L","Avant Garde",Futura,sans-serif;
 }
+
 #error {
     color: white;
     font-size: 18px;
@@ -19,9 +20,10 @@
 
 svg {
         
-    font: 8px;
-    font-family: 'Open Sans', sans-serif;
- 
+    font-size: 20px;
+    font-family: "Century Gothic","Apple Gothic",AppleGothic,"URW Gothic L","Avant Garde",Futura,sans-serif;
+    fill: white;
+    margin-top: 10%;
 }
 
 path {
@@ -31,8 +33,9 @@ path {
 
 .axis path, .axis line {
     fill: none;
-    stroke: grey;
-    stroke-width: 1;
+    stroke: white;
+    font-size: 10px;
+    stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
@@ -42,7 +45,11 @@ path {
     color: white;
 }
 
+.line {
+    stroke-width: 1px;
+}
 
-    
+
+
     
       
