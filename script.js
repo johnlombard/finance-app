@@ -29,7 +29,7 @@ function companyData(response) {
 
     // add ticker and exchange
     $("#exchange").text("Exchange: " + response.quote.primaryExchange);
-    $("#ticker").text("Ticker: " + response.quote.symbol);
+    $("#ticker").text(response.quote.symbol);
 
     $("#ceo").text("CEO: " + response.company.CEO);
 
@@ -494,36 +494,34 @@ function updatePage(ticker) {
             // });
         });
     });
-
-
-
-    $("#addToList").on("click", function (event) {
-        event.preventDefault();
-        if ($("#name").text() !== "") {
-            dataRef.ref().push({
-
-                companyName: $("#name").text(),
-                price: $("#price").text(),
-                percentChange: $("#percentChange").text(),
-                exchange: $("#exchange").text(),
-                sector: $("#sector").text(),
-                ticker: $("#ticker").text()
-            });
-        };
-    });
 };
+
+
+
+
 
 dataRef.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
-    $("#watchlist").append("<tr><td>" +
-        childSnapshot.val().companyName +
-        " </td><td> " + childSnapshot.val().price +
-        " </td><td> " + childSnapshot.val().percentChange +
-        " </td><td> " + childSnapshot.val().exchange +
-        " </td><td> " + childSnapshot.val().sector +
-        " </td>" +
-        "<td><button class='viewButton' onclick='viewButton(" + '"' + childSnapshot.val().ticker + '"' + ")'>View</button></td>" +
-        "</tr> ");
+
+    $.ajax({
+        url: "https://api.iextrading.com/1.0/stock/" + childSnapshot.val().ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10",
+        method: "GET",
+        error: function () {
+            $("#error").text("Invalid ticker!")
+        }
+    }).then(function (response) {
+        $("#watchlist").append("<tr><td>" +
+        response.quote.companyName +
+            " </td><td> " + response.quote.latestPrice +
+            " </td><td> " + rounding(response.quote.changePercent * 100) +
+            " </td><td> " + response.quote.primaryExchange +
+            " </td><td> " + response.quote.sector +
+            " </td>" +
+            "<td><button class='viewButton' onclick='viewButton(" + '"' + childSnapshot.val().ticker + '"' + ")'>View</button></td>" +
+            "</tr> ");
+    });
+
+
 }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
 });
@@ -542,7 +540,16 @@ $(document).ready(function () {
         var searchTerm = $("#search").val().trim();
         console.log(searchTerm);
         updatePage(searchTerm);
-        
+
+    });
+
+    $("#addToList").on("click", function (event) {
+        event.preventDefault();
+        if ($("#name").text() !== "Company Name") {
+            dataRef.ref().push({
+                ticker: $("#ticker").text()
+            });
+        };
     });
 });
 
