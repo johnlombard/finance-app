@@ -83,7 +83,7 @@ function addLogo(response) {
 };
 
 function removeIvalidTicker() {
-    $("#error").remove(":contains('Invalid ticker')");
+    $("#error").html("");
     // $(".panel").remove(":contains('Invalid ticker')");
 }
 
@@ -103,6 +103,7 @@ function peerNewsData(response) {
 
 
 function finRatios(response) {
+    $("#ratios").html("<h3>"+ "Ratios" + "</h3>");
     //52 Week High
     $("#high").text("52 Week High:  " + rounding(response.quote.week52High));
 
@@ -164,6 +165,8 @@ function financials(response) {
 
     // Gross Profit
     $("#grossProfit").text("Gross Profit:  " + addCommas(response.stats.grossProfit));
+
+    $("#qHeadlines").html("<h3>Financials Past Four Quarters</h3>");
 
     for (i = 0; i <= 3; i++) {
 
@@ -264,8 +267,9 @@ function addNews(response) {
         // newArticle.append(newImage);
         articleContainer.append(newArticle);
         $("#articles").append(articleContainer);
-    }
-}
+    };
+    $("#news").html("<h3>News (Click on a headline)</h3>");
+};
 
 function addCommas(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -287,12 +291,13 @@ function updatePage(ticker) {
         url: finURL,
         method: "GET",
         error: function () {
-            $("#error").text("Invalid ticker!")
+            $("#error").html("Invalid ticker! Please Try Again.");
+            $("#logo").replaceWith("");
         }
     }).then(function (response) {
         companyData(response);
         peerNewsData(response);
-        removeIvalidTicker()
+        removeIvalidTicker();
         finRatios(response);
         financials(response);
         addLogo(response);
@@ -318,7 +323,7 @@ function updatePage(ticker) {
 
             // sets dimensions of canvas/graph
             var margin = { top: 100, right: 100, bottom: 50, left: 0 },
-                width = 700 - margin.left - margin.right,
+                width = 800 - margin.left - margin.right,
                 height = 350 - margin.top - margin.bottom;
 
             // Parse the date / time
@@ -427,7 +432,7 @@ function updatePage(ticker) {
                             .attr("x", width / 2)               //Dynamically moves with the graph
                             .attr("y", height + margin.bottom)
                             .style("text-anchor", "middle")
-
+                            .style("font-size", "12px")
                             .text("Date").style("color", "white");
                         // Add the text label for the Y axis
                         svg.append("text")
@@ -508,7 +513,7 @@ dataRef.ref().on("child_added", function (childSnapshot) {
         url: "https://api.iextrading.com/1.0/stock/" + childSnapshot.val().ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10",
         method: "GET",
         error: function () {
-            $("#error").text("Invalid ticker!")
+            $("#error").text("Invalid ticker! Please try again.")
         }
     }).then(function (response) {
         $("#watchlist").append("<tr><td>" +
