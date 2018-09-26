@@ -77,12 +77,13 @@ function addLogo(response) {
     logoImage.attr("src", response.logo.url);
     logoImage.attr("width", 50);
     $("#logo").html("");
-    $("#logo").html(logoImage);
+    $("#logo").append(logoImage);
+  
 
 };
 
 function removeIvalidTicker() {
-    $("#error").remove(":contains('Invalid ticker')");
+    $("#error").html("");
     // $(".panel").remove(":contains('Invalid ticker')");
 }
 
@@ -102,6 +103,8 @@ function peerNewsData(response) {
 
 
 function finRatios(response) {
+
+    $("#ratios").html("<h3>"+ "Ratios" + "</h3>");
     //52 Week High
     $("#high").text("52 Week High:  " + rounding(response.quote.week52High));
 
@@ -163,6 +166,8 @@ function financials(response) {
 
     // Gross Profit
     $("#grossProfit").text("Gross Profit:  " + addCommas(response.stats.grossProfit));
+
+    $("#qHeadlines").html("<h3>Financials Past Four Quarters</h3>");
 
     for (i = 0; i <= 3; i++) {
 
@@ -252,6 +257,7 @@ function financials(response) {
 
 // NEED TO RESET THIS WHEN SEARCHING FOR NEW COMPANY
 function addNews(response) {
+   
     for (i = 0; i < 7; i++) {
         var articleContainer = $("<li>");
         var newArticle = $("<a>");
@@ -263,7 +269,8 @@ function addNews(response) {
         // newArticle.append(newImage);
         articleContainer.append(newArticle);
         $("#articles").append(articleContainer);
-    }
+    };
+    $("#news").html("<h3>News (Click on a headline)</h3>");
 }
 
 function addCommas(number) {
@@ -306,7 +313,9 @@ function viewButton(ticker) {
         url: finURL,
         method: "GET",
         error: function () {
-            $("#error").html("Invalid ticker! Please Try Again.")
+            $("#error").html("Invalid ticker! Please Try Again.");
+            $("#logo").replaceWith("");
+            
         }
     }).then(function (response) {
         companyData(response);
@@ -362,6 +371,7 @@ $(document).ready(function () {
         // clears articles from previous company
         $("#articles").html("");
         $("svg").remove();
+        
 
         var ticker = searchTerm;
         var finURL = "https://api.iextrading.com/1.0/stock/" + ticker + "/batch?types=company,quote,financials,stats,logo,peers,&range=1m&last=10";
@@ -371,12 +381,13 @@ $(document).ready(function () {
             url: finURL,
             method: "GET",
             error: function () {
-                $("#error").text("Invalid ticker!")
+                $("#error").text("Invalid ticker! Please try again.")
+                
             }
         }).then(function (response) {
             companyData(response);
             peerNewsData(response);
-            removeIvalidTicker()
+            removeIvalidTicker();
             finRatios(response);
             financials(response);
             addLogo(response);
@@ -402,7 +413,7 @@ $(document).ready(function () {
 
                 // sets dimensions of canvas/graph
                 var margin = { top: 100, right: 100, bottom: 50, left: 0 },
-                    width = 700 - margin.left - margin.right,
+                    width = 800 - margin.left - margin.right,
                     height = 350 - margin.top - margin.bottom;
 
                 // Parse the date / time
@@ -511,7 +522,7 @@ $(document).ready(function () {
                                 .attr("x", width / 2)               //Dynamically moves with the graph
                                 .attr("y", height + margin.bottom)
                                 .style("text-anchor", "middle")
-                                
+                                .style("font-size", "12px")
                                 .text("Date").style("color", "white");
                             // Add the text label for the Y axis
                             svg.append("text")
@@ -598,29 +609,3 @@ $(document).ready(function () {
     });
 });
 
-// John's notes for financials
-// IS
-    // Revenue
-        // totalRevenue	number
-        // costOfRevenue	number
-        // EQUAL grossProfit	number
-
-    // Operating Expense
-        // researchAndDevelopment	number
-        // operatingExpense	number
-        // operatingIncome	number
-// operatingGainsLosses ***Here
-// currentAssets	number
-// currentCash	number
-// totalCash	number
-// totalAssets	number
-
-// currentDebt	number
-// totalDebt	number
-// totalLiabilities	number
-
-// shareholderEquity	number
-
-// cashChange	number
-// cashFlow	number
-// operatingGainsLosses

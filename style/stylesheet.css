@@ -5,6 +5,8 @@
 #error {
     color: white;
     font-size: 18px;
+    margin-right: 35px;
+    font-weight: bold;
 }
 
 .chart div {
