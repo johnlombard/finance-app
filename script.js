@@ -73,11 +73,12 @@ function companyData(response) {
 
 function addLogo(response) {
 
+    $(".logoImg").remove();
     logoImage = $("<img>");
     logoImage.attr("src", response.logo.url);
     logoImage.attr("width", 50);
-    $("#logo").html("");
-    $("#logo").html(logoImage);
+    logoImage.addClass("logoImg")
+    $("#logo").append(logoImage);
 
 };
 
