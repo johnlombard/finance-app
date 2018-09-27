@@ -323,7 +323,7 @@ function updatePage(ticker) {
 
             // sets dimensions of canvas/graph
             var margin = { top: 100, right: 100, bottom: 50, left: 0 },
-                width = 800 - margin.left - margin.right,
+                width = 850 - margin.left - margin.right,
                 height = 350 - margin.top - margin.bottom;
 
             // Parse the date / time
@@ -433,26 +433,7 @@ function updatePage(ticker) {
                             .attr("y", height + margin.bottom)
                             .style("text-anchor", "middle")
                             .style("font-size", "12px")
-                            .text("Date").style("color", "white");
-                        // Add the text label for the Y axis
-                        svg.append("text")
-                            .attr("transform", "rotate(-90)")
-                            .attr("x", 0 - (height / 2))
-                            .attr("y", 0 - margin.left)
-                            .attr("dy", "1em")
-                            .style("text-anchor", "middle")
-                            .style("color", "white")
-                            .text("Price");
-
-                        // Adding the Title
-                        svg.append("text")
-                            .attr("x", (width / 2))
-                            .attr("y", 0 - (margin.top / 2))
-                            .attr("text-anchor", "middle")
-                            .style("font-size", "16px")
-                            .style("text-decoration", "underline")
-                            .style("color", "white")
-                            .text("Price to Date");
+                            .text("Date");
                         //Mouseover
                         var focus = svg.append("g")
                             .attr("class", "focus")
