@@ -433,7 +433,7 @@ function updatePage(ticker) {
                             .attr("y", height + margin.bottom)
                             .style("text-anchor", "middle")
                             .style("font-size", "12px")
-                            .text("Date");
+                            .text("date");
                         //Mouseover
                         var focus = svg.append("g")
                             .attr("class", "focus")
